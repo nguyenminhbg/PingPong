@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppBongBan.Views.Groups.ReplayCommentPage"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:custom="clr-namespace:AppChat.Custom;assembly=AppChat"
+             xmlns:listviewcustom="clr-namespace:AppBongBan.Custom.ListViewCustom"
+             Title="Trả lời bình luận"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator VerticalOptions="Start"
+                                   IsRunning="True"
+                                   HeightRequest="30"
+                                   HorizontalOptions="CenterAndExpand"
+                                   IsVisible="{Binding IsLoading}"/>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <listviewcustom:ListviewOfScroll VerticalOptions="FillAndExpand"
+                          HasUnevenRows="True"
+                          x:Name="lv"
+                          ItemSelected="lvComment_ItemSelected"
+                          ItemsSource="{Binding ReplyComment.ListReplyComment}"
+                          SeparatorVisibility="None">
+                    <x:Arguments>
+                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                    </x:Arguments>
+                    <ListView.Header>
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0"
+                                     VerticalOptions="Start"
+                                     CompressedLayout.IsHeadless="True">
+                            <forms:CachedImage
+                                             Margin="5"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start"
+                                             HeightRequest="30"
+                                             WidthRequest="30"
+                                             Source="{Binding ReplyComment.Comment.Account.Avatar_Uri}">
+                                <forms:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#011111"/>
+                                </forms:CachedImage.Transformations>
+                            </forms:CachedImage>
+                            <StackLayout Orientation="Vertical"
+                                         HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="FillAndExpand"
+                                         Margin="5"
+                                         Padding="5">
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding ReplyComment.Comment.Account.fullname}"
+                                               TextColor="Black"
+                                               FontSize="17"
+                                               HorizontalOptions="FillAndExpand"/>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label   LineBreakMode="WordWrap"
+                                                     Text="{Binding ReplyComment.Comment.Comment.Format.Text}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     TextColor="Black"
+                                                     FontSize="Small"/>
+                                        <forms:CachedImage
+                                                         DownsampleToViewSize="true"  
+                                                         Aspect="AspectFit"
+                                                         HeightRequest="180"
+                                                         HorizontalOptions="Start"
+                                                         IsVisible="{Binding ReplyComment.Comment.Comment.Format.IsImage}"
+                                                         Source="{Binding ReplyComment.Comment.Comment.Format.Image_Id}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout 
+                                           VerticalOptions="Start"
+                                           Orientation="Horizontal">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label x:Name="likeComment"
+                                           VerticalOptions="CenterAndExpand"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="{Binding ReplyComment.Comment.LikeColor}"
+                                           Text="{Binding ReplyComment.Comment.TextLike}"/>
+                                        <Label
+                                                  x:Name="LikeReplyComment"
+                                                  VerticalOptions="CenterAndExpand"
+                                                  TextColor="#5D6A76"
+                                                  FontAttributes="Bold"
+                                                  FontSize="12"
+                                                  Text="{Binding ReplyComment.Comment.CountLike, StringFormat=' - {0}'}"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+
+                                    <Label 
+                                                  x:Name="ReplyComment"
+                                                  Margin="5,0,0,0"
+                                                  FontSize="12"
+                                                  FontAttributes="Bold"
+                                                  VerticalOptions="CenterAndExpand"
+                                                  TextColor="#5D6A76"
+                                                  Text="{Binding ReplyComment.Comment.CountReplies, StringFormat='Trả lời - {0}'}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ReplyCommentExe"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </ListView.Header>
+                    <ListView.Footer>
+                        <StackLayout IsVisible="{Binding ReplyComment.IsLoading}">
+                            <ActivityIndicator 
+                                HeightRequest="30"
+                                Color="#103763"
+                                IsRunning="true"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </ListView.Footer>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <iview:CommentView
+                                                  TabLike="CommentView_TabLike"
+                                                  TabComment="CommentView_TabComment"
+                                                  TabShowImage="CommentView_TabShowImage"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </listviewcustom:ListviewOfScroll>
+            </StackLayout>
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="End">
+                <forms:CachedImage
+                    IsVisible="{Binding ReplyComment.IsTyping}"
+                    HeightRequest="20"
+                    WidthRequest="50"
+                    Source="Typinggif.gif"
+                    VerticalOptions="Start"
+                    HorizontalOptions="CenterAndExpand"/>
+                <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="StartAndExpand"
+                                 Margin="0"
+                                 BackgroundColor="SlateGray"
+                                 IsVisible="{Binding ReplyComment.isImage}">
+                    <Frame CornerRadius="10"
+                               Margin="2"
+                               HorizontalOptions="Center"
+                               VerticalOptions="CenterAndExpand"
+                               Padding="0">
+                        <StackLayout Orientation="Vertical">
+                            <forms:CachedImage
+                                Source="Delete.png"
+                                Aspect="AspectFill"
+                                HeightRequest="20"
+                                WidthRequest="20"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="Start">
+                                <forms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </forms:CachedImage.GestureRecognizers>
+                            </forms:CachedImage>
+
+                            <forms:CachedImage
+                                                HeightRequest="100"
+                                                WidthRequest="100"
+                                                DownsampleToViewSize="true" 
+                                                Source="{Binding ReplyComment.ImageView.UriTmp}"  
+                                                Aspect="AspectFill">
+                            </forms:CachedImage>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <!--Viết bình luận-->
+                <BoxView HeightRequest=".5"
+                         BackgroundColor="Gray"
+                         HorizontalOptions="FillAndExpand"/>
+                <custom:KeyboardStack Orientation="Horizontal"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="End"
+                                      Margin="0,0,0,10">
+                    <Image
+                                    Margin="5"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    HeightRequest="30"
+                                    WidthRequest="30"
+                                    Source="picture.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AddImage"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Frame Padding="2"
+                               CornerRadius="5"
+                               HasShadow="False"
+                              BackgroundColor="#F2F2F2"
+                               HorizontalOptions="FillAndExpand">
+                        <custom:MyEditor
+                                HasRoundedCorner="False"
+                                IsExpandable="true"
+                                Placeholder="Nhập trả lời bình luận"
+                                PlaceholderColor="Gray"
+                                x:Name="myEditor"
+                                FontSize="Small"
+                               BackgroundColor="#F2F2F2"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand"
+                            TextChanged="MyEditor_TextChanged"/>
+                    </Frame>
+                    <Button x:Name="lbSend"
+                                Margin="0,0,3,0"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                HeightRequest="35"
+                                WidthRequest="50"
+                                BackgroundColor="Transparent"
+                                Image="SendImage"
+                                Clicked="TapSend"/>
+                </custom:KeyboardStack>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

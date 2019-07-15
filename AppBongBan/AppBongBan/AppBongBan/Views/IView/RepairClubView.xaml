@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             xmlns:custom="clr-namespace:AppBongBan.Custom"
+             x:Class="AppBongBan.Views.IView.RepairClubView">
+    <ContentView.Content>
+        <StackLayout>
+            <StackLayout 
+                HorizontalOptions="FillAndExpand"
+                Orientation="Vertical"
+                Margin="5">
+                <StackLayout Orientation="Horizontal">
+                    <Frame CornerRadius="10"
+                           Padding="0"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Start">
+                        <Image
+                             HeightRequest="60"
+                             WidthRequest="60"
+                             Aspect="AspectFill"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             Source="{Binding MyClub.ClubAvatarUri}"/>
+                    </Frame>
+                    <!--button chọn thêm ảnh-->
+                    <Image
+                        x:Name="ImgAdd"
+                        VerticalOptions="Center"
+                        HorizontalOptions="StartAndExpand"
+                        Source="add_a_photo.png">
+                    </Image>
+                </StackLayout>
+                <ProgressBar Progress="{Binding Progress}"
+                             ProgressColor="Blue"/>
+            </StackLayout>
+            <ScrollView x:Name="scroll">
+                <StackLayout Orientation="Vertical">
+                    <Grid Margin="10,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <!--Hàng thông báo lỗi-->
+                            <RowDefinition Height="30"/>
+                            <!--Hàng điền tên club-->
+                            <RowDefinition Height="*"/>
+                            <!--Hàng Title Điền-->
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="30"/>
+                            <!--Hàng điền địa chỉ-->
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--Tên câu lạc bộ hàng 0-->
+                        <Label 
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"                           
+                            FontAttributes="Bold"
+                            Text="Đặt tên câu lạc bộ:"
+                            TextColor="Black"/>
+                        <!--Thông báo lỗi hàng 1-->
+                        <StackLayout 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Orientation="Horizontal"
+                            HeightRequest="30">
+                            <Label     HorizontalOptions="StartAndExpand"
+                                       TextColor="Red"
+                                       FontSize="Micro"
+                                       LineBreakMode="WordWrap"
+                                       x:Name="lbNotifi"
+                                       Text="{Binding lbNotifi, Mode=TwoWay}"/>
+                            <Label 
+                                       x:Name="lbName"
+                                       FontSize="Micro"
+                                       HorizontalOptions="EndAndExpand"
+                                       VerticalOptions="EndAndExpand"
+                                       Text="0/150"/>
+                        </StackLayout>
+                        <!--Điền tên club hàng 2-->
+                        <Frame 
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Padding="0"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Start"
+                               CornerRadius="10">
+                            <custom:CustomEntry
+                                     x:Name="fillName"
+                                     Text="{Binding NewClub.ClubName, Mode=TwoWay}"
+                                     HorizontalOptions="FillAndExpand"
+                                     PlaceholderColor="Red"
+                                     Placeholder="Điền Tên câu lạc bộ" />
+                        </Frame>
+                        <!--Địa chỉ câu lạc bộ hàng 3-->
+                        <Label 
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"  
+                            Text="Địa chỉ câu lạc bộ:"
+                            FontAttributes="Bold"
+                            TextColor="Black"/>
+                        <!--Thông báo lỗi hàng 4-->
+                        <StackLayout 
+                                     Grid.Row="4"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="3"
+                                     Orientation="Horizontal" 
+                                     HeightRequest="30"
+                                     VerticalOptions="Start">
+                            <Label HorizontalOptions="StartAndExpand"
+                                   TextColor="Red"
+                                   FontSize="Micro"
+                                   LineBreakMode="WordWrap"
+                                   Text="{Binding lbNotifiAddress, Mode=TwoWay}"
+                                   x:Name="lbNotifiAddress"/>
+                            <Label x:Name="lbAddress"
+                                   FontSize="Micro"
+                                   HorizontalOptions="EndAndExpand"
+                                   VerticalOptions="EndAndExpand"
+                                   Text="0/500"/>
+                        </StackLayout>
+                        <!--ĐHại chỉ nhà hàng 5-->
+                        <Label Grid.Row="5"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Địa chỉ nhà:"
+                               TextColor="Black"/>
+                        <Frame 
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand"
+                              Grid.Row="5"
+                              Grid.Column="1"
+                              Grid.ColumnSpan="2"
+                              CornerRadius="10"
+                              Padding="0">
+                            <custom:CustomEntry
+                                      x:Name="fillStreet"
+                                      Text="{Binding NewClub.StreetAddress, Mode=TwoWay}"
+                                      PlaceholderColor="Red"
+                                      Placeholder="Điền địa chỉ nhà"/>
+                        </Frame>
+                        <!--Địa chỉ xã hàng 6-->
+                        <Label Grid.Row="6"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Xã/Phường:"
+                               TextColor="Black"/>
+                        <Frame
+                             Padding="0"
+                             CornerRadius="10"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="2"
+                             Grid.Row="6">
+                            <StackLayout Orientation="Horizontal"
+                                         VerticalOptions="FillAndExpand"
+                                         HorizontalOptions="FillAndExpand">
+                                <Label
+                                   Margin="5,0,0,0"
+                                   VerticalOptions="FillAndExpand"
+                                   Text="{Binding CommunWar}"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="StartAndExpand"/>
+                                <Image Source="SelectDropdown.png"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   BackgroundColor="Gray"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectedCommunWarCmd}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Label Grid.Row="7"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Huyện/Quận:"
+                               TextColor="Black"/>
+                        <Frame
+                            Padding="0"
+                            Grid.Row="7"
+                            CornerRadius="10"
+                            Grid.ColumnSpan="2"
+                            Grid.Column="1">
+                            <StackLayout
+                                Orientation="Horizontal"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand">
+                                <Label 
+                                     Margin="5,0,0,0"
+                                     VerticalOptions="FillAndExpand"
+                                     Text="{Binding District}"
+                                     VerticalTextAlignment="Center"
+                                     HorizontalOptions="StartAndExpand"/>
+                                <Image Source="SelectDropdown.png"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   BackgroundColor="Gray"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectedDistrict}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Label Grid.Row="8"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Tỉnh/Thành phố:"
+                               TextColor="Black"/>
+                        <Frame
+                             Padding="0"
+                             Grid.Row="8"
+                             Grid.ColumnSpan="2"
+                             CornerRadius="10"
+                             Grid.Column="1">
+                            <StackLayout
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                Orientation="Horizontal">
+                                <Label 
+                                     Margin="5,0,0,0"
+                                     VerticalOptions="FillAndExpand"
+                                     Text="{Binding Province}"
+                                     VerticalTextAlignment="Center"
+                                     HorizontalOptions="StartAndExpand"  />
+                                <Image Source="SelectDropdown.png"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   BackgroundColor="Gray"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectedCity}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <!--Quốc gia hàng 9-->
+                        <Label Grid.Row="9"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Quốc gia:"
+                               TextColor="Black"/>
+                        <Frame
+                            Grid.Row="9"
+                            Grid.Column="2"
+                            Padding="0"
+                            CornerRadius="10">
+                            <custom:CustomEntry  
+                               Text="Việt Nam"
+                               TextColor="Gray"
+                               IsEnabled="False"/>
+                        </Frame>
+                        <!--Số điện thoại hàng 10-->
+                        <Label Grid.Row="10"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Số điện thoại:"
+                               TextColor="Black"/>
+                        <Frame CornerRadius="10"
+                               Padding="0"
+                               Grid.Row="10"
+                               Grid.Column="1"
+                               Grid.ColumnSpan="2">
+                            <custom:CustomEntry 
+                               x:Name="fillPhoneNumber"
+                               Keyboard="Telephone"
+                               PlaceholderColor="Gray"
+                               Placeholder="Điền số điện thoại liên hệ"
+                               Text="{Binding NewClub.ClubPhoneNumber ,Mode=TwoWay}"/>
+                        </Frame>
+                        <!--Mô tả nhóm hàng 11-->
+                        <Label Grid.Row="11"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"  
+                               Text="Mô tả nhóm:"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                        <!--Ngày thành lập hàng 12-->
+                        <Label Grid.Row="12"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Ngày thành lập:"
+                               TextColor="Black"/>
+                        <Frame
+                              CornerRadius="10"
+                              Padding="0"
+                              Grid.Row="12"
+                              Margin="0,0,50,0"
+                              Grid.Column="1"
+                              Grid.ColumnSpan="2"
+                              x:Name="Calendar">
+                            <StackLayout
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand"
+                                 Orientation="Horizontal" >
+                                <Image
+                                    HorizontalOptions="Start"
+                                    Source="calendar.png"
+                                    HeightRequest="35"
+                                    WidthRequest="35">
+                                </Image>
+                                <Label 
+                                   TextColor="Black"
+                                   HorizontalOptions="FillAndExpand"
+                                   HeightRequest="35"
+                                   Parent="5"
+                                   VerticalTextAlignment="Center"
+                                   VerticalOptions="CenterAndExpand"
+                                   Text="{Binding SelectDate ,Mode=TwoWay}"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CalendarCmd}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <!--Thời gian mở hàng 13-->
+                        <Label Grid.Row="13"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Thời gian mở:"
+                               TextColor="Black"/>
+                        <Frame CornerRadius="10"
+                               Grid.Row="13"
+                               Grid.Column="1"
+                               Grid.ColumnSpan="2"
+                               Margin="0,0,50,0"
+                               Padding="0">
+                            <StackLayout 
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand"
+                               Orientation="Horizontal" >
+                                <Image
+                                   HorizontalOptions="Start"
+                                   Source="clock.png"
+                                   HeightRequest="35"
+                                   WidthRequest="35">
+                                </Image>
+                                <Label 
+                                    HorizontalOptions="FillAndExpand"
+                                    HeightRequest="35"
+                                    TextColor="Black"
+                                    Parent="5"
+                                    VerticalTextAlignment="Center"
+                                    VerticalOptions="CenterAndExpand"
+                                    Text="{Binding SelectOpenTime ,Mode=TwoWay}"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenTimeCmd}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <!--Thời gian đóng hàng 14-->
+                        <Label Grid.Row="14"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Thời gian đóng:"
+                               TextColor="Black"/>
+                        <Frame
+                             Grid.Row="14"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="2"
+                             Padding="0"
+                             Margin="0,0,50,0"
+                             CornerRadius="10">
+                            <StackLayout 
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand"
+                               Orientation="Horizontal" >
+                                <Image
+                                   HorizontalOptions="Start"
+                                   Source="clock.png"
+                                   HeightRequest="35"
+                                   WidthRequest="35">
+                                </Image>
+                                <Label HorizontalOptions="FillAndExpand"
+                                   HeightRequest="35"
+                                   TextColor="Black"
+                                   Parent="5"
+                                   VerticalTextAlignment="Center"
+                                   VerticalOptions="CenterAndExpand"
+                                   Text="{Binding SelectCloseTime ,Mode=TwoWay}"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CloseTimeCmd}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
+                    <Label     Margin="10,5,10,5"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Text="Mô tả chung:"/>
+                    <Frame 
+                        Padding="0"
+                        CornerRadius="10"
+                        Margin="5"
+                        MinimumHeightRequest="100"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="EndAndExpand">
+                        <iview:MyEditor
+                               x:Name="MyEditor"
+                               FontSize="14"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="EndAndExpand"/>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

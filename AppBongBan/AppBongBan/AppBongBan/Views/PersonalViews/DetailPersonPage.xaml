@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             xmlns:listviewcustom="clr-namespace:AppBongBan.Custom.ListViewCustom"
+             x:Class="AppBongBan.Views.PersonalViews.DetailPersonPage"
+             Title="{Binding Acc.fullname}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="more_vert_bar.png" Command="{Binding MoreCmd}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <!--<listviewcustom:ListviewOfScroll Margin="0">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <listviewcustom:ListviewOfScroll.Header>-->
+        <StackLayout>
+            <ScrollView>
+                <Frame CornerRadius="10" 
+                       
+                       Margin="5,5,5,5"
+                       Padding="2">
+                    <Grid ColumnSpacing="0"
+                          RowSpacing="0"
+                          Padding="0"
+                          HorizontalOptions="FillAndExpand"
+                          Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <iview:HeaderAccView Grid.Row="0"
+                                             HorizontalOptions="CenterAndExpand"
+                                             Grid.Column="0"
+                                             Grid.ColumnSpan="2"/>
+                        <!--Hiển thị 2 mục thông tin và ảnh-->
+                        <StackLayout  Grid.Row="1"
+                                  Grid.Column="0">
+                            <Label Text="Thông tin"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               TextColor="Orange"/>
+                            <BoxView BackgroundColor="Orange"
+                                 HeightRequest="2"
+                                 VerticalOptions="End"
+                                 HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout  Grid.Row="1"
+                                  Grid.Column="1">
+                            <Label Text="Ảnh"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               TextColor="Black"/>
+                            <BoxView BackgroundColor="Gray"
+                                 HeightRequest="2"
+                                 VerticalOptions="End"
+                                 HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout
+                                    Margin="5"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                   Grid.ColumnSpan="2">
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="FillAndExpand">
+                                <Label Text="Hạng: "/>
+                                <Label Text="{Binding Level}"/>
+                                <Label Text="{Binding Accept}"
+                                   TextColor="{Binding TextColor,  Converter={StaticResource StringToColorConverter}}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand">
+                                <Label Text="Mặt vợt: "/>
+                                <Label Text="{Binding Facebat}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand">
+                                <Label Text="Cốt vợt: "/>
+                                <Label Text="Đang phát triển"/>
+                                <Label Text="{Binding Blade}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand">
+                                <Label Text="Tham gia Club chính:"/>
+                                <Label Text="Đang phát triển"/>
+                                <Label Text="{Binding ClubOrginal}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="Các club tham gia sinh hoạt: "/>
+                                <Label Text="Đang phát triển"/>
+                                <Label Text="{Binding ListNameClub}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="Thành tích: "/>
+                                <Label Text="Đang phát triển"/>
+                                <Label Text="{Binding Description}"/>
+                            </StackLayout>
+                            <Image Source="more_info.png"
+                               HeightRequest="20"
+                               WidthRequest="20"
+                               Margin="5"
+                               HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Text="{Binding TextAcceptFriend}"
+                                        x:Name="btnChat"
+                                    IsVisible="{Binding IsChat}"
+                                    Clicked="Button_Clicked_1"
+                                    BorderRadius="10"
+                                    TextColor="White"
+                                    BackgroundColor="#009dfe"
+                                    Grid.Column="0"/>
+                                <Button Text="{Binding TextStatusFriend}"
+                                        x:Name="btnStatue"
+                                    IsVisible="{Binding IsAddFriend}"
+                                    Clicked="Button_Clicked"
+                                    BorderRadius="10"
+                                    TextColor="White"
+                                    BackgroundColor="#009dfe"
+                                    Grid.Column="1"/>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+            </ScrollView>
+        
+        </StackLayout>
+             
+            <!--</listviewcustom:ListviewOfScroll.Header>-->
+        <!--</listviewcustom:ListviewOfScroll>-->
+    </ContentPage.Content>
+</ContentPage>

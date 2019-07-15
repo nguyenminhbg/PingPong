@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="AppBongBan.Views.IView.ItemPerView">
+    <ContentView.Content>
+        <Frame Padding="5"
+               HasShadow="False"
+               BackgroundColor="White"
+               HorizontalOptions="FillAndExpand"
+               CornerRadius="0"
+               Margin="0">
+            <Grid HorizontalOptions="FillAndExpand"
+                RowSpacing="5"
+                ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Ảnh đại diện của danh sách cá nhân-->
+                <StackLayout
+                      Grid.Column="0"
+                      Grid.Row="0"
+                    Grid.RowSpan="2"
+                      HorizontalOptions="Center"
+                      VerticalOptions="StartAndExpand"
+                     Margin="5,5,5,5"
+                    CompressedLayout.IsHeadless="True">
+                    <forms:CachedImage Source="{Binding accounts.Avatar_Uri}"
+                                   Aspect="AspectFit"
+                                   HeightRequest="65"
+                                   WidthRequest="65">
+                        <forms:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                        </forms:CachedImage.Transformations>
+                    </forms:CachedImage>
+                </StackLayout>
+                <!--Tên người dùng-->
+                <StackLayout Grid.Row="0"
+                             Orientation="Vertical"
+                             Grid.Column="1"
+                             HorizontalOptions="Start"
+                             CompressedLayout.IsHeadless="True">
+                    <Label Text="{Binding accounts.fullname}"
+                           FontSize="Small"
+                           TextColor="Black"
+                           FontAttributes="Bold"/>
+                    <StackLayout
+                           Orientation="Horizontal">
+                        <Label Text="{Binding Level}"
+                               FontSize="Micro"
+                               TextColor="Black"/>
+                        <Label Text="{Binding AccepLevel}"
+                               TextColor="#009dfe"
+                               FontSize="Micro"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+                </StackLayout>
+                <!--Mặt vợt-->
+                <StackLayout
+                        Orientation="Vertical"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                    HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding Facebat, StringFormat='Mặt vợt: {0}'}"
+                           FontSize="Micro"
+                            TextColor="Black"
+                           HorizontalOptions="FillAndExpand"/>
+                    <Label Text="{Binding Blade, StringFormat='Cốt vợt: {0}'}"
+                           FontSize="Micro"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                            TextColor="Black"
+                           HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <!--Tên club-->
+                <StackLayout HorizontalOptions="CenterAndExpand"
+                             Grid.Column="0"
+                             Grid.Row="2"
+                             Orientation="Horizontal"
+                             x:Name="ActionClub"
+                             VerticalOptions="CenterAndExpand"
+                             CompressedLayout.IsHeadless="True">
+                    <Image Source="club.png"
+                           Aspect="AspectFit"
+                           Margin="2"
+                           HeightRequest="20"
+                           WidthRequest="20"/>
+                    <Label Text="{Binding ClubName}"
+                           VerticalOptions="CenterAndExpand"
+                           VerticalTextAlignment="Center"
+                           TextColor="Black"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+                <StackLayout  VerticalOptions="CenterAndExpand"
+                              HorizontalOptions="CenterAndExpand"
+                              Grid.Column="1"
+                              Grid.Row="2"
+                              x:Name="Map"
+                              Orientation="Horizontal"
+                              CompressedLayout.IsHeadless="True">
+                    <Image Source="location.png"
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               Margin="2"
+                               WidthRequest="20"/>
+                    <Label Text="{Binding Distance, StringFormat='{0} m'}"
+                               FontSize="Small"
+                           VerticalTextAlignment="Center"
+                           VerticalOptions="Center"
+                            TextColor="Black"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2"
+                             x:Name="ActionChallenge"
+                             Grid.Column="2"
+                             HorizontalOptions="CenterAndExpand"
+                             CompressedLayout.IsHeadless="True">
+                    <Image Source="{Binding Challenge}"
+                           Aspect="AspectFit"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2"
+                             Grid.Column="3"
+                             x:Name="ActionFriend"
+                             HorizontalOptions="CenterAndExpand"
+                             CompressedLayout.IsHeadless="True">
+                    <Image 
+                        HeightRequest="20"
+                        WidthRequest="20"
+                        Source="{Binding iconAddFriend.statusIcon}"
+                        Aspect="AspectFit"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

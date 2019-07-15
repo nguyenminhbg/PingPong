@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    xmlns:forms="clr-namespace:Naxam.Controls.Forms;assembly=Naxam.TopTabbedPage.Forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:groups="clr-namespace:AppBongBan.Views.Groups"
+            x:Class="AppBongBan.Views.Groups.SearchLocationTabPage"
+            Title="Tìm kiếm khu vực">
+    <groups:PersonalSearchPage x:Name="person"/>
+    <groups:ClubSearchPage x:Name="club"/>
+</TabbedPage>

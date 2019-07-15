@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<iview:BaseContentPage
+    xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    x:Class="AppBongBan.Views.PersonalViews.MorePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical"
+                         BackgroundColor="#ffffff">
+                <StackLayout
+                Padding="10"
+                VerticalOptions="Start"
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                    CompressedLayout.IsHeadless="True">
+                    <forms:CachedImage
+                    x:Name="Avatar"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    Aspect="AspectFill"
+                    HorizontalOptions="Start">
+                        <forms:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                        </forms:CachedImage.Transformations>
+                    </forms:CachedImage>
+                    <StackLayout Orientation="Vertical" 
+                             VerticalOptions="CenterAndExpand"
+                                 CompressedLayout.IsHeadless="True">
+                        <Label 
+                        FontSize="Medium"
+                        TextColor="Black"
+                        x:Name="AccountName"/>
+                        <Label
+                        FontSize="Micro"
+                        TextColor="#103763"
+                        Text="Trang cá nhân của bạn"/>
+                    </StackLayout>
+                    <forms:CachedImage 
+                        x:Name="imgEdit"
+                    Aspect="AspectFill"
+                    HeightRequest="25"
+                    WidthRequest="25"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="EndAndExpand">
+                        <forms:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_3"/>
+                        </forms:CachedImage.GestureRecognizers>
+                    </forms:CachedImage>
+                </StackLayout>
+                <BoxView 
+                Margin="0"
+                BackgroundColor="LightGray"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="10"/>
+                <!--vẽ item Tìm kiếm khu vực-->
+                <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="10"
+                             CompressedLayout.IsHeadless="True">
+                    <forms:CachedImage
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Start"
+                        x:Name="imgSearch">
+                        <forms:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                        </forms:CachedImage.Transformations>
+                        <forms:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </forms:CachedImage.GestureRecognizers>
+                    </forms:CachedImage>
+                    <Label 
+                    TextColor="Black"
+                    VerticalOptions="CenterAndExpand"
+                    x:Name="txtSearch">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <!--vẽ item Thêm câu lạc bộ-->
+                <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="10">
+                    <forms:CachedImage
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    Aspect="AspectFill"
+                    HorizontalOptions="Start"
+                    x:Name="imgClub">
+                        <forms:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                        </forms:CachedImage.Transformations>
+                        <forms:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                        </forms:CachedImage.GestureRecognizers>
+                    </forms:CachedImage>
+                    <Label 
+                    TextColor="Black"
+                    VerticalOptions="CenterAndExpand"
+                    x:Name="txtAddclub">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <!--vẽ item Câu lạc bộ-->
+                <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="10"
+                             CompressedLayout.IsHeadless="True">
+                    <forms:CachedImage
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    HorizontalOptions="Start"
+                    Aspect="AspectFill"
+                    x:Name="imgMyclub">
+                        <forms:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                        </forms:CachedImage.Transformations>
+                        <forms:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                        </forms:CachedImage.GestureRecognizers>
+                    </forms:CachedImage>
+                    <Label 
+                    TextColor="Black"
+                    VerticalOptions="CenterAndExpand"
+                    x:Name="txtMyClub">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </StackLayout>
+
+                <!--vẽ item Đăng xuất-->
+                <StackLayout Orientation="Vertical"
+                             VerticalOptions="EndAndExpand"
+                             HorizontalOptions="FillAndExpand">
+                    <BoxView 
+                         BackgroundColor="LightGray"
+                         HorizontalOptions="FillAndExpand"
+                         HeightRequest="10"/>
+                    <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                                 Margin="5">
+                        <Image
+                             HeightRequest="40"
+                             WidthRequest="40"
+                            Aspect="AspectFit"
+                            HorizontalOptions="Start"
+                            Source="loguotIcon.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_4"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label 
+                             TextColor="Black"
+                             VerticalTextAlignment="Center"
+                             x:Name="txtLoguot">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_4"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</iview:BaseContentPage>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppBongBan.Views.Groups.Images.DetailImageCmdPage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <Grid BackgroundColor="AliceBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <forms:CachedImage Aspect="AspectFit"
+                               Source="{Binding Source}"
+                               DownsampleToViewSize="True"
+                               Grid.Row="0">
+            </forms:CachedImage>
+            
+            <StackLayout Grid.Row="1"
+                         Orientation="Vertical">
+                <Label Text="Xem chi tiết bài viết"
+                       Margin="5,5,5,0"
+                       FontSize="Small"
+                       VerticalOptions="Start"
+                       TextColor="Blue">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapDetailContent"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <StackLayout Orientation="Horizontal" 
+                             Margin="5">
+                    <StackLayout Orientation="Horizontal"
+                                 Margin="0,0,5,0">
+                        <Image Source="like.png"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Start"
+                           Aspect="AspectFit"/>
+                        <Label Text="{Binding Like}"
+                               FontSize="Small"
+                               TextColor="Black"
+                               VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" 
+                                 Margin="5,0,0,0"
+                                 >
+                        <Image Source="icon_comment.png"
+                               HeightRequest="20"
+                               WidthRequest="20"
+                               VerticalOptions="CenterAndExpand"
+                               Aspect="AspectFit"/>
+                        <Label Text="{Binding ReplyCount}"
+                               FontSize="Small"
+                               TextColor="Black"
+                               VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

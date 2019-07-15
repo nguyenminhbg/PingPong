@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="AppBongBan.Views.Groups.MyClubs.MyClubsPage"
+             Title="Câu lạc bộ"
+              BackgroundColor="#E6E6E6">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Không có club mà người dùng tham gia"
+                   TextColor="#f15a25"
+                   IsVisible="{Binding MyClubs.IsNull}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand"/>
+            <ListView
+                    ItemSelected="LvDp_ItemSelected"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding MyClubs.IsLoading, Mode=OneWay}"
+                    RefreshCommand="{Binding RefreshCmd}"
+                    ItemsSource="{Binding MyClubs.ListClubs}"
+                    SeparatorVisibility="None"
+                    ItemTapped="LvDp_ItemTapped"
+                    SeparatorColor="Transparent"
+                    HasUnevenRows="True"
+                    x:Name="LvDp">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="0" Spacing="0">
+                                <BoxView HeightRequest="8"
+                                         HorizontalOptions="Fill"
+                                         VerticalOptions="Fill"
+                                         BackgroundColor="#D8D8D8"/>
+                                <iview:ItemClubView
+                                TapCheckin="ItemClubView_TapCheckin"
+                                TapMap="ItemClubView_TapMap"
+                                TapListUsr="ItemClubView_TapListUsr"
+                                TapJoin="ItemClubView_TapJoin"/>
+                            </StackLayout>
+                         
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

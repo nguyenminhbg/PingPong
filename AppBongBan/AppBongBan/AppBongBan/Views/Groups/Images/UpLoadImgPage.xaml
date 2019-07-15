@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="AppBongBan.Views.Groups.Images.UpLoadImgPage"
+             Title="Chọn ảnh"
+             >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="add_a_photo.png" Clicked="FlowImageShow"/>
+        <ToolbarItem Text="Xong" Clicked="UploadImage"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout IsVisible="{Binding UploadVM.IsShow}">
+                <StackLayout Orientation="Vertical"
+                         HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="10">
+                        <forms:CachedImage
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            Aspect="AspectFill"
+                            HorizontalOptions="Start"
+                            Source="add_a_photo.png">
+                        </forms:CachedImage>
+                        <Label 
+                            TextColor="Black"
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="Medium"
+                            Text="Máy ảnh"/>
+                    </StackLayout>
+                    <BoxView HeightRequest="1"
+                         BackgroundColor="Gray"
+                         VerticalOptions="EndAndExpand"
+                         HorizontalOptions="FillAndExpand"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TakePhoto"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"
+                         HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="10">
+                        <forms:CachedImage
+                             HeightRequest="40"
+                             WidthRequest="40"
+                             Aspect="AspectFill"
+                             HorizontalOptions="Start"
+                             Source="picture.png">
+                        </forms:CachedImage>
+                        <Label 
+                             TextColor="Black"
+                             VerticalOptions="CenterAndExpand"
+                             FontSize="Medium"
+                             Text="Thiết bị"/>
+                    </StackLayout>
+                    <BoxView HeightRequest="1"
+                         BackgroundColor="Gray"
+                         VerticalOptions="EndAndExpand"
+                         HorizontalOptions="FillAndExpand"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ChooseImgDevice"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+            <controls:FlowListView
+                FlowItemsSource="{Binding UploadVM.Images}"
+                SeparatorVisibility="None"
+                FlowItemTapped="FlowListView_FlowItemTapped"
+                HasUnevenRows="True"
+                FlowTappedBackgroundColor="Black"
+                FlowRowBackgroundColor="White"
+                FlowColumnCount="3">
+                <controls:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10"
+                                   Margin="2"
+                                   Padding="2">
+                            <StackLayout Orientation="Vertical">
+                                <forms:CachedImage
+                                            Source="Delete.png"
+                                            Aspect="AspectFill"
+                                            HeightRequest="20"
+                                            WidthRequest="20"
+                                            HorizontalOptions="EndAndExpand"
+                                            VerticalOptions="Start">
+                                    <forms:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="DeleteImage"/>
+                                    </forms:CachedImage.GestureRecognizers>
+                                </forms:CachedImage>
+                                <forms:CachedImage
+                                        DownsampleToViewSize="true" 
+                                        AbsoluteLayout.LayoutFlags="All" 
+                                        HeightRequest="100" 
+                                        AbsoluteLayout.LayoutBounds="0,0,1,1"  
+                                        HorizontalOptions="FillAndExpand"
+                                        WidthRequest="100"
+                                        Source="{Binding UriTmp}"  
+                                        Aspect="AspectFill">
+                                </forms:CachedImage>
+                                <ProgressBar HorizontalOptions="FillAndExpand"
+                                                 ProgressColor="Blue"
+                                                 Progress="{Binding Progess}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </controls:FlowListView.FlowColumnTemplate>
+            </controls:FlowListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

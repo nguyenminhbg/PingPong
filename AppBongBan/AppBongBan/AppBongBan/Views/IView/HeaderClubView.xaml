@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="AppBongBan.Views.IView.HeaderClubView">
+    <ContentView.Resources>
+        <Style x:Key="flex" TargetType="FlexLayout">
+            <Setter Property="Direction" Value="Row"/>
+            <Setter Property="Wrap" Value="Wrap"/>
+            <Setter Property="AlignItems" Value="Stretch"/>
+            <Setter Property="AlignContent" Value="Start"/>
+        </Style>
+        <StyleSheet Source="/Views/IView/PhotosPage.css"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout>
+            <FlexLayout
+                    x:Name="LayoutOne"
+                    Style="{StaticResource flex}">
+                <!--Ảnh thứ 1-->
+                <forms:CachedImage
+                         Aspect="AspectFill"
+                         Margin="1"
+                         StyleClass="full"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding ClubVM.MyClub.ClubAvatarUri}"/>
+            </FlexLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

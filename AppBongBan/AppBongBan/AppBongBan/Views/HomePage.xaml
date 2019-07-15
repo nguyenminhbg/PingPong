@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                  xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                  xmlns:controls="clr-namespace:AppBongBan.Controls"
+                  x:Class="AppBongBan.Views.HomePage">
+    <MasterDetailPage.Master >
+        <ContentPage Icon="item_menu.png"
+                     Title="Master"
+                     BackgroundColor="#787468">
+            <controls:GradientColorStack Orientation="Vertical"
+                                         BackgroundColor="#30557d">
+                <StackLayout VerticalOptions="Start"
+                             BackgroundColor="White"
+                             HorizontalOptions="FillAndExpand">
+                    <forms:CachedImage Source="logo.png"
+                                       VerticalOptions="EndAndExpand"
+                                       HorizontalOptions="StartAndExpand"
+                                       Aspect="AspectFit"
+                                       HeightRequest="40"
+                                       Margin="5,30,5,5"/>
+                </StackLayout>
+                <!--<BoxView HorizontalOptions="FillAndExpand"
+                         HeightRequest="1"
+                         BackgroundColor="#E6E6E6"/>-->
+                <StackLayout 
+                    Orientation="Horizontal"
+                    CompressedLayout.IsHeadless="True"
+                    x:Name="avartaStack">
+                    <forms:CachedImage
+                          Margin="10,10,5,10"
+                          x:Name="Avatar"
+                          HorizontalOptions="Start"
+                          HeightRequest="50"
+                          WidthRequest="50"
+                          Aspect="AspectFill">
+                        <forms:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                        </forms:CachedImage.Transformations>
+                    </forms:CachedImage>
+                    <Label
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           x:Name="NameUser"
+                           TextColor="White"/>
+                </StackLayout>
+                <SearchBar
+                        Margin="0"
+                        TextColor="Black"
+                        CancelButtonColor="Black"
+                        PlaceholderColor="Gray"
+                        Placeholder="Tìm kiếm tin tức"
+                        FontSize="Small"
+                        BackgroundColor="White"
+                        x:Name="search"
+                        HorizontalOptions="FillAndExpand"/>
+                    <ListView 
+                        BackgroundColor="Transparent"
+                    x:Name="menu"
+                    HasUnevenRows="True"
+                    ItemTapped="menu_ItemTapped"
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Margin="5,10,0,10"
+                                             CompressedLayout.IsHeadless="True">
+                                        <Image Source="{Binding Icon}" 
+                                           HeightRequest="30"
+                                           WidthRequest="30" Margin="5"/>
+                                        <Label VerticalOptions="Center"
+                                           Margin="10,0,0,0"
+                                           Text="{Binding Title}"
+                                           TextColor="White"/>
+                                        <Image HorizontalOptions="EndAndExpand"
+                                               Margin="5"
+                                               Source="next" 
+                                               HeightRequest="25" 
+                                               WidthRequest="25"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </controls:GradientColorStack>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <ContentPage>
+                    <ContentPage.Content>
+                        <Label Text="Detail Page"/>
+                    </ContentPage.Content>
+                </ContentPage>
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+
+</MasterDetailPage>

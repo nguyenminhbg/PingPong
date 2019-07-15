@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppBongBan.Views.IView.ClubItemView">
+  <ContentView.Content>
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image 
+                Grid.Column="0"
+                Grid.Row="0"
+                VerticalOptions="StartAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Source="{Binding Avatar}"/>
+            <StackLayout Grid.Column="1"
+                         Grid.Row="0"
+                         Grid.ColumnSpan="4"
+                         Orientation="Vertical">
+                <Label Text="{Binding Title}"
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+                <Label Text="{Binding AddressClub}"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <!--hiển thị số lượng danh sách thành viên-->
+            <StackLayout 
+                Grid.Row="1"
+                Grid.Column="1">
+                <StackLayout
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <Image 
+                    HeightRequest="20"
+                    WidthRequest="20"
+                    Source="{Binding imagePerson}"/>
+                    <Label 
+                    VerticalOptions="CenterAndExpand"
+                    Text="{Binding numbPe}"/>
+                </StackLayout>
+            </StackLayout>
+            <!--Hiển thị số lượng checkin-->
+            <StackLayout 
+                Grid.Row="1"
+                Grid.Column="2">
+                <StackLayout
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <Image 
+                    HeightRequest="20"
+                    WidthRequest="20"
+                    Source="{Binding imageCheck}"/>
+                    <Label
+                    VerticalOptions="CenterAndExpand"
+                    Text="{Binding numbCh}"/>
+                </StackLayout>
+            </StackLayout>
+            <!--Hiển thị thách đấu challenge-->
+            <StackLayout 
+                Grid.Row="1"
+                Grid.Column="3"
+                Orientation="Horizontal">
+                <Image 
+                    HeightRequest="20"
+                    WidthRequest="20"
+                    VerticalOptions="CenterAndExpand"
+                    Aspect="AspectFit"
+                    Source="{Binding imageChall}"/>
+            </StackLayout>
+            <!--Hiển thị yêu cầu tham gia nhóm hoặc là thành viên nhóm-->
+            <StackLayout 
+                Grid.Row="1"
+                Grid.Column="4"
+                HeightRequest="20"
+                WidthRequest="20"
+                VerticalOptions="CenterAndExpand"
+                Orientation="Horizontal">
+                <Image Source="{Binding imageFriend}"/>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

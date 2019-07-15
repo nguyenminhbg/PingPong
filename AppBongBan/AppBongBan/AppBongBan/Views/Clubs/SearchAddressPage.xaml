@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppBongBan.Views.Clubs.SearchAddressPage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding TextHolder}">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+
+            <SearchBar HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Start"
+                       HeightRequest="50"
+                       x:Name="Search"
+                       Placeholder="Điền từ tìm kiếm"
+                       TextChanged="SearchBar_TextChanged"/>
+            <ListView
+                x:Name="lv"
+                ItemTapped="lv_ItemTapped"
+                SelectedItem="{Binding SelectedItem}"
+                HasUnevenRows="True"
+                ItemAppearing="ListView_ItemAppearing">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell
+                          Text="{Binding TextShow}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="AppBongBan.Views.Groups.Images.ListImageClubPage"
+             Title="{Binding listImageVM.Title, StringFormat='Ảnh ({0})'}">
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator HeightRequest="30"
+                               WidthRequest="30"
+                               VerticalOptions="Start"
+                               HorizontalOptions="Center"
+                               IsRunning="True"
+                               IsVisible="{Binding listImageVM.Loading}"/>
+            <controls:FlowListView
+                FlowItemsSource="{Binding listImageVM.ListImage}"
+                SeparatorVisibility="None"
+                FlowItemTapped="FlowListView_FlowItemTapped"
+                HasUnevenRows="True"
+                FlowTappedBackgroundColor="Black"
+                FlowRowBackgroundColor="White"
+                FlowColumnCount="4">
+                <controls:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <Frame     Padding="0"
+                                   Margin="5"
+                                   HeightRequest="80" 
+                                   WidthRequest="70" 
+                                   CornerRadius="5">
+                            <forms:CachedImage  Source="{Binding ImageUrl}"
+                                        DownsampleToViewSize="True"
+                                        Aspect="AspectFill" 
+                                        HeightRequest="80" 
+                                        WidthRequest="70">
+                            </forms:CachedImage>
+                        </Frame>
+                    </DataTemplate>
+                </controls:FlowListView.FlowColumnTemplate>
+            </controls:FlowListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="AppBongBan.Views.Groups.ClubPage"
+             xmlns:prism ="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:labelTextColorSample="clr-namespace:AppBongBan.Custom"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding ClubVM.MyClub.ClubName}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="more_vert_bar.png" Clicked="MoreTab"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <iview:CommandClubView HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="Start"
+                                   HeightRequest="50"
+                                   TapCheckin="CommandClubView_TapCheckin"
+                                   TapAddImage="CommandClubView_TapAddImage"
+                                   TapAddNews="CommandClubView_TapAddNews"/>
+            <!--Nội dung club-->
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="FillAndExpand">
+                <ListView SeparatorVisibility="None"
+                          x:Name="lvNews"
+                          ItemAppearing="LvNews_ItemAppearing"
+                          ItemSelected="LvNews_ItemSelected"
+                          ItemsSource="{Binding ClubVM.ListContents}"
+                          HasUnevenRows="True">
+                    <ListView.Header>
+                        <Frame
+                               Margin="5,0,5,5"
+                               Padding="0"
+                               CornerRadius="10">
+                            <Grid Padding="0"
+                                  ColumnSpacing="0"
+                                  RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="200"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <iview:HeaderClubView Grid.Row="0"/>
+                                <StackLayout
+                                        Grid.Row="0"
+                                        Padding="5"
+                                        VerticalOptions="EndAndExpand"
+                                        HorizontalOptions="FillAndExpand"
+                                        Orientation="Horizontal">
+                                    <Label Text="{Binding ClubVM.MyClub.ClubName}"
+                                               TextColor="White"
+                                               FontSize="Small"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start"/>
+                                    <Frame Padding="0"
+                                           HorizontalOptions="EndAndExpand">
+                                        <StackLayout 
+                                               VerticalOptions="FillAndExpand"
+                                               HorizontalOptions="FillAndExpand"
+                                               Orientation="Horizontal">
+                                            <Label 
+                                               Margin="4"
+                                               HorizontalOptions="Start"
+                                               FontSize="Small"
+                                               TextColor="Black"
+                                               Text="{Binding ClubVM.MyClub.TextRelation}"/>
+                                            <Image
+                                               BackgroundColor="Gray"
+                                               HorizontalOptions="EndAndExpand"
+                                               HeightRequest="15"
+                                               WidthRequest="15"
+                                               Source="ic_arrow_drop_down.png"/>
+                                        </StackLayout>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapJoin"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                </StackLayout>
+                                <StackLayout Padding="0" Margin="0"
+                                             Grid.Row="1"
+                                             VerticalOptions="FillAndExpand"
+                                             HorizontalOptions="FillAndExpand">
+                                    <Grid
+                                         Margin="0,5,0,0"
+                                         RowSpacing="0"
+                                         ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--Tác vụ xem danh sách thành viên-->
+                                        <StackLayout Grid.Column="0"
+                                                     Margin="0"
+                                                     Padding="5"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="FillAndExpand">
+                                            <StackLayout 
+                                                        Orientation="Horizontal"
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        VerticalOptions="CenterAndExpand">
+                                                <Image 
+                                                      VerticalOptions="CenterAndExpand"
+                                                      HeightRequest="20"
+                                                      WidthRequest="20"
+                                                      Source="ic_number.png"/>
+                                                <Label
+                                                      VerticalOptions="CenterAndExpand"
+                                                      Text="{Binding ClubVM.MyClub.MemberCount}"
+                                                      TextColor="Black"/>
+                                            </StackLayout>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapListMembers"/>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                        <!--Tác vụ xem danh sách checkin-->
+                                        <StackLayout Grid.Column="1"
+                                                     Padding="5"
+                                                     Margin="0"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="FillAndExpand">
+                                            <StackLayout 
+                                                Orientation="Horizontal"
+                                                HorizontalOptions="CenterAndExpand"
+                                                VerticalOptions="CenterAndExpand">
+
+                                                <Image 
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="20"
+                                                    WidthRequest="20"
+                                                    Source="ic_checkin.png"/>
+                                                <Label 
+                                                    VerticalOptions="CenterAndExpand"
+                                                    Text="{Binding ClubVM.MyClub.CheckInCount}"
+                                                    TextColor="Black"/>
+
+                                            </StackLayout>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                        <!--Tác vụ xem danh sách ảnh-->
+                                        <StackLayout Grid.Column="2"
+                                                     Padding="5"
+                                                     Margin="0"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="FillAndExpand">
+                                            <StackLayout 
+                                                 Orientation="Horizontal"
+                                                 HorizontalOptions="CenterAndExpand"
+                                                 VerticalOptions="CenterAndExpand">
+
+                                                <Image 
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="20"
+                                                    WidthRequest="20"
+                                                    Source="image.png"/>
+                                                <Label
+                                                    VerticalOptions="CenterAndExpand"
+                                                    Text="{Binding ClubVM.MyClub.ImageCount}"
+                                                    TextColor="Black"/>
+                                            </StackLayout>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                        <!--Tác vụ xem danh sách bài đăng-->
+                                        <StackLayout Grid.Column="3"
+                                                     Padding="5"
+                                                     Margin="0"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="FillAndExpand">
+                                            <StackLayout 
+                                                Orientation="Horizontal"
+                                                HorizontalOptions="CenterAndExpand"
+                                                VerticalOptions="CenterAndExpand">
+
+                                                <Image 
+                                                   VerticalOptions="CenterAndExpand"
+                                                   HeightRequest="20"
+                                                   WidthRequest="20"
+                                                   Source="document.png"/>
+                                                <Label
+                                                   VerticalOptions="CenterAndExpand"
+                                                   Text="{Binding ClubVM.MyClub.ContentCount}"
+                                                   TextColor="Black"/>
+
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                    <BoxView 
+
+                                        Margin="0"
+                                        HorizontalOptions="FillAndExpand" 
+                                        HeightRequest="1"
+                                        Color="Gray"/>
+                                    <!--Thời gian hoạt động-->
+                                    <Grid
+                                        Margin="0"
+                                        RowSpacing="0"
+                                        ColumnSpacing="0"
+                                        >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--gian hoạt động-->
+                                        <StackLayout 
+                                             Margin="5"
+                                             Orientation="Vertical"
+                                             Grid.Column="0">
+                                            <Label Text="Câu lạc bộ hoạt động:"/>
+                                            <Label Text="{Binding ClubVM.MyClub.TimeActive}"
+                                                   FontSize="Small"
+                                                   TextColor="OrangeRed"/>
+                                            <Label Text="Số điện thoại liên hệ"/>
+                                            <Label Text="{Binding ClubVM.MyClub.ClubPhoneNumber}"
+                                                   FontSize="Small"
+                                                   TextColor="OrangeRed"/>
+                                        </StackLayout>
+                                        <StackLayout 
+                                           Grid.Column="1"
+                                           Margin="0,5,0,5">
+                                            <Image
+                                               HeightRequest="30"
+                                               WidthRequest="30"
+                                               HorizontalOptions="CenterAndExpand"
+                                               VerticalOptions="EndAndExpand"
+                                               Source="phone_club.png">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapCall"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+
+                                        </StackLayout>
+                                    </Grid>
+                                    <BoxView 
+                                         HeightRequest="1"
+                                         HorizontalOptions="FillAndExpand"
+                                         BackgroundColor="Gray"/>
+                                    <!--vực địa điểm-->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="4*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="3*"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.Row="0"
+                                               Grid.Column="0"
+                                               HeightRequest="20"
+                                               WidthRequest="20"
+                                               Source="icon_map.png"/>
+                                        <Label 
+                                              Grid.Row="0"
+                                              Grid.Column="1"
+                                              Grid.RowSpan="2"
+                                              LineBreakMode="WordWrap"
+                                              FontSize="Small"
+                                              Text="{Binding ClubVM.MyClub.AddressClub}"/>
+                                        <StackLayout
+                                              Grid.Row="0"
+                                              Grid.RowSpan="2"
+                                              Grid.Column="2" >
+                                            <Image 
+                                                HeightRequest="40"
+                                                WidthRequest="40"    
+                                                VerticalOptions="EndAndExpand"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Source="directions.png">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapShowMap"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+                                    </Grid>
+                                    <!--More xem thêm thông tin-->
+                                    <Image 
+                                         Source="more_info.png"
+                                         HorizontalOptions="CenterAndExpand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapShowMoreInfo"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                                <!--</StackLayout>-->
+                            </Grid>
+                        </Frame>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Spacing="0" Padding="0">
+                                    <BoxView HeightRequest="8"
+                                         HorizontalOptions="Fill"
+                                         VerticalOptions="Fill"
+                                         BackgroundColor="#D8D8D8"/>
+                                    <Frame BackgroundColor="White"
+                                          HasShadow="False"
+                                          Padding="5">
+                                        <iview:ItemNewsViewInClub
+                                                                TapImage="TapImage"
+                                                                TabComment="ItemNewsView_TabComment"
+                                                                TabLike="ItemNewsView_TabLike"
+                                                                HorizontalOptions="FillAndExpand"
+                                                                VerticalOptions="FillAndExpand"/>
+                                    </Frame>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <Label  Text="Loading ..."
+                    FontSize="15"
+                    HorizontalOptions="CenterAndExpand" 
+                    IsVisible="{Binding ClubVM.IsMore}"
+                    TextColor="#103763"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

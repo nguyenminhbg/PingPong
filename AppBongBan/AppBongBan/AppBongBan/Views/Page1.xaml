@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppBongBan.Views.Page1"
+             BackgroundColor="#009dfe">
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Name="SportTV" Priority="0" Order="Primary"/>
+    </ContentPage.ToolbarItems>-->
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         Margin="5">
+                <Label Text="Cơ quan chủ đài: SportTV"
+                       FontSize="20"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Tổng biên tâp: Vũ Xuân Quý"
+                       TextColor="White"
+                         HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Biên tập viên: Dương Thu Thảo - mobile: 0905270495"
+                       TextColor="White"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Bình luận viên: Nguyễn Đức Tiến - mobile: 0978783683"
+                       TextColor="White"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Website: sporttv.vn"
+                       TextColor="White"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Địa chỉ: 130 Nguyễn Đức Cảnh - Hoàng Mai -  Hà Nội"
+                       TextColor="White"
+                       HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

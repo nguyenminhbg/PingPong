@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="AppBongBan.Views.IView.ItemClubView">
+    <ContentView.Content>
+        <Frame Padding="5"
+              HasShadow="False"
+               CornerRadius="0"
+               BackgroundColor="White">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <forms:CachedImage
+                           HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Start"
+                        Margin="5,5,5,5"
+                         Grid.Column="0"
+                         Grid.Row="0"
+                         Aspect="AspectFit"
+                         HeightRequest="65"
+                         WidthRequest="65"
+                         Source="{Binding ClubAvatarUri}">
+                    <forms:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                    </forms:CachedImage.Transformations>
+                </forms:CachedImage>
+                <StackLayout Grid.Column="1"
+                         Grid.Row="0"
+                         Grid.ColumnSpan="4"
+                             HorizontalOptions="FillAndExpand"
+                         Orientation="Vertical">
+                    <Label Text="{Binding ClubName}"
+                       FontAttributes="Bold"
+                           HorizontalOptions="FillAndExpand"
+                       FontSize="Medium"
+                       TextColor="Black"/>
+                    <Label 
+                       Text="{Binding AddressClub}"
+                       FontSize="Small"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+
+                </StackLayout>
+                <!--hiển thị số lượng danh sách thành viên-->
+                <StackLayout
+                            x:Name="ListUsr"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Orientation="Vertical">
+                    <Image 
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           Source="ic_members.png"/>
+                    <Label  TextColor="Black"
+                           VerticalOptions="CenterAndExpand"
+                           FontSize="Small"
+                            FontAttributes="Bold"
+                           Text="{Binding MemberCount, StringFormat='Số lượng: {0}'}"/>
+                </StackLayout>
+                <!--Hiển thị số lượng checkin-->
+                <StackLayout 
+                    x:Name="CheckIn"
+                    Grid.Row="1"
+                    Grid.Column="1">
+                    <StackLayout
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Orientation="Vertical">
+                        <Image 
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            Source="my_location.png"/>
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="Small"
+                            Text="{Binding CheckInCount, StringFormat='Checkin: {0}'}"
+                             TextColor="Black"
+                            FontAttributes="Bold"/>
+                    </StackLayout>
+                </StackLayout>
+                <!--Hiển thị khoảng cách-->
+                <StackLayout 
+                     x:Name="ShowMap"
+                     Grid.Row="1"
+                     Grid.Column="2"
+                     HorizontalOptions="CenterAndExpand"
+                     Orientation="Horizontal">
+                    <StackLayout 
+                          VerticalOptions="CenterAndExpand"
+                          HorizontalOptions="CenterAndExpand"
+                          Orientation="Vertical">
+                        <Image 
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           Source="location.png"/>
+                        <Label 
+                             VerticalOptions="CenterAndExpand"
+                             FontSize="Small"
+                             Text="{Binding Distance, StringFormat='{0} m'}"
+                             TextColor="Black"
+                            FontAttributes="Bold"/>
+                        <!--{Binding numbLoc}-->
+                    </StackLayout>
+                </StackLayout>
+                <!--Hiển thị thách đấu challenge-->
+                <StackLayout 
+                     Grid.Row="1"
+                     Grid.Column="3"
+                     Margin="2"
+                     x:Name="Chall"
+                     HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="FillAndExpand">
+                    <Image 
+                        VerticalOptions="StartAndExpand"
+                        HeightRequest="20"
+                        WidthRequest="20"
+                        Aspect="AspectFit"
+                        Source="{Binding Challenge}"/>
+                </StackLayout>
+                <!--Hiển thị yêu cầu tham gia nhóm hoặc là thành viên nhóm-->
+                <StackLayout
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Margin="2"
+                    x:Name="JoinClub"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Image Source="{Binding IconRelation}"
+                           HeightRequest="22"
+                           WidthRequest="22"
+                           VerticalOptions="StartAndExpand"
+                           Aspect="AspectFit"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

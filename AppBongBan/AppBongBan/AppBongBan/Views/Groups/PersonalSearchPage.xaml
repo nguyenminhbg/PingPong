@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:AppBongBan.Views.IView"
+             xmlns:listviewcustom="clr-namespace:AppBongBan.Custom.ListViewCustom"
+             x:Class="AppBongBan.Views.Groups.PersonalSearchPage"
+             Title="Cá nhân"
+             BackgroundColor="#D8D8D8">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand">
+            <Label TextColor="#f15a25"
+                     IsVisible="{Binding persons.IsAccNull}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand"/>
+            <listviewcustom:ListviewOfScroll
+                    ItemsSource="{Binding persons.listPerson}"
+                    x:Name="itemsource"
+                    HasUnevenRows="True"
+                   SeparatorColor="Transparent"
+                    RefreshCommand="{Binding AccRefreshCmd}"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding persons.IsFreshing}"
+                    ItemTapped="Itemsource_ItemTapped">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+                <listviewcustom:ListviewOfScroll.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Spacing="0"
+                                         Padding="0">
+                                <BoxView HeightRequest="8"
+                                         HorizontalOptions="Fill"
+                                         VerticalOptions="Fill"
+                                         BackgroundColor="#D8D8D8"
+                                         Margin="0"/>
+                                <controls:ItemPerView
+                                          TapChall="ItemPerView_TapChall"
+                                          TapClub="ItemPerView_TapClub"
+                                          TapFriend="ItemPerView_TapFriend"
+                                          TapMap="ItemPerView_TapMap"
+                                          Margin="0"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </listviewcustom:ListviewOfScroll.ItemTemplate>
+            </listviewcustom:ListviewOfScroll>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

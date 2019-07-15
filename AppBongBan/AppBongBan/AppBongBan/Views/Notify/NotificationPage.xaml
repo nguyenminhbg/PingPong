@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+             xmlns:badge="clr-namespace:AppBongBan.Custom.Badge"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chat="clr-namespace:AppChat.Views.Chat;assembly=AppChat"
+             xmlns:notify="clr-namespace:AppBongBan.Views.Notify"
+            xmlns:plugin="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
+             x:Class="AppBongBan.Views.Notify.NotificationPage"
+             Title="Thông báo">
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem x:Name="Notifi" Order="Primary" Priority="0"/>
+    </TabbedPage.ToolbarItems>
+    <chat:RequestAddFriend Title="Bạn bè"
+                           plugin:TabBadge.BadgeColor="Blue"
+                           plugin:TabBadge.BadgeText="{Binding addFriendReq}"
+                           plugin:TabBadge.BadgeFont="18"
+                           plugin:TabBadge.BadgeTextColor="White"
+                           plugin:TabBadge.BadgePosition="PositionTopRight"
+                           x:Name="fiend"/>
+        <notify:ListChallengePage Title="Thách đấu"
+                                   plugin:TabBadge.BadgeColor="Blue"
+                                 plugin:TabBadge.BadgeText="{Binding Notifi.notify}"
+                                 plugin:TabBadge.BadgeFont="18"
+                                 plugin:TabBadge.BadgeTextColor="White"
+                                 plugin:TabBadge.BadgePosition="PositionTopRight"
+                                  x:Name="challegen"/>
+        <ContentPage Title="Cộng đồng"
+                      x:Name="community">
+            <Label Text="Tính năng đang phát triển"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"/>
+        </ContentPage>
+</TabbedPage>

@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="AppBongBan.Views.Notify.ListChallengePage">
+    <ContentPage.Content>
+        <Grid ColumnSpacing="0"
+              RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout
+                      Grid.Column="0"
+                      Grid.Row="0"
+                      x:Name="TabPerson"
+                      BackgroundColor="#f15a25"
+                      Padding="0">
+                    <StackLayout VerticalOptions="CenterAndExpand"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="CenterAndExpand">
+                        <forms:CachedImage
+                                Margin="5"
+                                VerticalOptions="CenterAndExpand"
+                                Source="account.png"
+                                HeightRequest="20"
+                                WidthRequest="20"/>
+                        <Label Text="Cá nhân"
+                               TextColor="White"
+                               VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    x:Name="TabClub"
+                    Padding="0"
+                    HeightRequest="50"
+                    BackgroundColor="#787468">
+                <StackLayout VerticalOptions="CenterAndExpand"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="CenterAndExpand">
+                    <forms:CachedImage
+                                 Margin="5"
+                                 VerticalOptions="CenterAndExpand"
+                                 Source="club.png"
+                                 HeightRequest="20"
+                                 WidthRequest="20"/>
+                    <Label Text="Club"
+                           TextColor="White"
+                           VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+                <StackLayout Grid.Row="1"
+                             IsVisible="{Binding Challenge, Mode=TwoWay}"
+                             x:Name="AccountLayout"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="2">
+                    <StackLayout Orientation="Horizontal"
+                             VerticalOptions="Start">
+                        <Label Text="LỜI MỜI THÁCH ĐẤU CÁ NHÂN"/>
+                        <Label Text="{Binding ChallCount}"/>
+                    </StackLayout>
+                    <ListView
+                    ItemsSource="{Binding Notifi.ListChallengesPer}"
+                    HasUnevenRows="True"
+                    ItemTapped="ListView_ItemTapped"
+                    ItemSelected="ListView_ItemSelected"
+                    SeparatorVisibility="Default">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame CornerRadius="10"
+                                       Padding="5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <forms:CachedImage
+                                            Grid.Column="0"
+                                            Grid.Row="0"
+                                            Source="{Binding Acc.Avatar_Uri}"
+                                            Aspect="AspectFit"
+                                                HorizontalOptions="Fill"
+                                                VerticalOptions="Center"
+                                            HeightRequest="75"
+                                            WidthRequest="75"/>
+                                            <StackLayout
+                                            Grid.Column="1"
+                                            Grid.Row="0"
+                                            Grid.RowSpan="2">
+                                                <Label Text="{Binding Acc.fullname}"
+                                                   TextColor="Black"/>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Acc.Level}"
+                                                   FontSize="Small"/>
+                                                    <Label Text="{Binding Acc.AccepLevel}"
+                                                   TextColor="Blue"
+                                                   FontSize="Small"/>
+                                                </StackLayout>
+                                                <Label Text="{Binding Acc.Facebat, StringFormat='Mặt vợt: {0}'}"
+                                                   FontSize="Small"
+                                                   TextColor="Black"/>
+                                                <Label Text="{Binding Acc.Blade, StringFormat='Cốt vợt: {0}'}"
+                                                   FontSize="Small"
+                                                   TextColor="Black"/>
+                                            </StackLayout>
+                                            <!--<StackLayout HorizontalOptions="StartAndExpand"
+                                                     Grid.Column="0"
+                                                     Grid.Row="2"
+                                                     Orientation="Horizontal"
+                                                     x:Name="ActionClub"
+                                                     VerticalOptions="CenterAndExpand">
+                                            <Image Source="club.png"
+                                                   Aspect="AspectFit"
+                                                   Margin="2"
+                                                   HeightRequest="20"
+                                                   WidthRequest="20"/>
+                                            <Label Text="{Binding Acc.ClubName}" VerticalOptions="CenterAndExpand"/>
+                                        </StackLayout>
+                                        <StackLayout  VerticalOptions="CenterAndExpand"
+                                                      HorizontalOptions="StartAndExpand"
+                                                      Grid.Column="2"
+                                                      Grid.Row="2"
+                                                      x:Name="Map"
+                                                      Orientation="Horizontal">
+                                            <Image Source="location.png"
+                                                   Aspect="AspectFit"
+                                                   HeightRequest="20"
+                                                   Margin="2"
+                                                   WidthRequest="20"/>
+                                            <Label Text="{Binding Acc.Distance, StringFormat='{0} m'}"
+                                                   VerticalOptions="CenterAndExpand"
+                                                   FontSize="Small"/>
+                                        </StackLayout>-->
+                                            <Button 
+                                            Grid.Column="1"
+                                            Grid.Row="2"
+                                            Text="Chấp nhận"
+                                            TextColor="White"
+                                            IsVisible="{Binding IsVisibleAccept}"
+                                            BackgroundColor="#f15a25"
+                                            Clicked="Button_Clicked"/>
+                                            <Button 
+                                            Grid.Column="2"
+                                            Grid.Row="2"
+                                            Text="Hủy"
+                                            IsVisible="{Binding IsvisibleDelete}"
+                                            BackgroundColor="#49463e"
+                                            TextColor="White"
+                                            Clicked="Button_Clicked_1"/>
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="2"
+                             x:Name="ClubLayout">
+                    <StackLayout Orientation="Horizontal"
+                             VerticalOptions="Start">
+                        <Label Text="LỜI MỜI THÁCH ĐẤU CLUB"/>
+                        <Label Text="{Binding ChallCount}"/>
+                    </StackLayout>
+                    <ListView
+                    ItemsSource="{Binding Notifi.ListChallengesClub}"
+                    HasUnevenRows="True"
+                    ItemTapped="ListView_ItemTapped_1"
+                    SeparatorVisibility="Default">
+                       <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame CornerRadius="10"
+                                       Padding="5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <forms:CachedImage
+                                            Grid.Column="0"
+                                            Grid.Row="0"
+                                            Source="{Binding Acc.Avatar_Uri}"
+                                            Aspect="AspectFill"
+                                            HeightRequest="50"
+                                            WidthRequest="50"/>
+                                            <StackLayout
+                                            Grid.Column="1"
+                                            Grid.Row="0"
+                                            Grid.RowSpan="2">
+                                                <Label Text="{Binding Acc.fullname}"      
+                                                   FontSize="Small"
+                                                   TextColor="Black"/>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Acc.Level}"
+                                                   FontSize="Small"/>
+                                                    <Label Text="{Binding Acc.AccepLevel}"
+                                                   TextColor="Blue"
+                                                   FontSize="Small"/>
+                                                </StackLayout>
+                                                <Label Text="{Binding Acc.Facebat, StringFormat='Mặt vợt: {0}'}"
+                                                   FontSize="Small"
+                                                   TextColor="Black"/>
+                                                <Label Text="{Binding Acc.Blade, StringFormat='Cốt vợt: {0}'}"
+                                                   FontSize="Small"
+                                                   TextColor="Black"/>
+                                                <Label Text="{Binding Clubs.ClubName, StringFormat='Thách đấu club {0}'}"
+                                                   FontSize="Small"
+                                                   TextColor="Blue"/>
+                                            </StackLayout>
+
+                                            <!--<StackLayout HorizontalOptions="StartAndExpand"
+                                                     Grid.Column="0"
+                                                     Grid.Row="2"
+                                                     Orientation="Horizontal"
+                                                     x:Name="ActionClub"
+                                                     VerticalOptions="CenterAndExpand">
+                                            <Image Source="club.png"
+                                                   Aspect="AspectFit"
+                                                   Margin="2"
+                                                   HeightRequest="20"
+                                                   WidthRequest="20"/>
+                                            <Label Text="{Binding Acc.ClubName}" VerticalOptions="CenterAndExpand"/>
+                                        </StackLayout>
+                                        <StackLayout  VerticalOptions="CenterAndExpand"
+                                                      HorizontalOptions="StartAndExpand"
+                                                      Grid.Column="2"
+                                                      Grid.Row="2"
+                                                      x:Name="Map"
+                                                      Orientation="Horizontal">
+                                            <Image Source="location.png"
+                                                   Aspect="AspectFit"
+                                                   HeightRequest="20"
+                                                   Margin="2"
+                                                   WidthRequest="20"/>
+                                            <Label Text="{Binding Acc.Distance, StringFormat='{0} m'}"
+                                                   VerticalOptions="CenterAndExpand"
+                                                   FontSize="Small"/>
+                                        </StackLayout>-->
+                                            <Button 
+                                                Grid.Column="1"
+                                                Grid.Row="2"
+                                                Text="Chấp nhận"
+                                                TextColor="White"
+                                                BackgroundColor="#f15a25"
+                                                Clicked="btnAccept"/>
+                                        <Button 
+                                                Grid.Column="2"
+                                                Grid.Row="2"
+                                                Text="Hủy"
+                                                BackgroundColor="#49463e"
+                                                TextColor="White"
+                                                Clicked="btnDelete"/>
+                                    </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Grid>
+    </ContentPage.Content>
+</ContentPage>

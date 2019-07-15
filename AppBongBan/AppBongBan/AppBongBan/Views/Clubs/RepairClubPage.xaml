@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             x:Class="AppBongBan.Views.Clubs.RepairClubPage"
+             Title="{Binding AddClubViewModel.NewClub.ClubName}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cập Nhật" Clicked="UpdateClub"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <iview:ClubView 
+            />
+    </ContentPage.Content>
+</ContentPage>

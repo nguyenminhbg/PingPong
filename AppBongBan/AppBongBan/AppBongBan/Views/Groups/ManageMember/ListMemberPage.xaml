@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="AppBongBan.Views.Groups.ManageMember.ListMemberPage"
+             Title="Thành viên">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      ItemsSource="{Binding ListMember.ListAccount}"
+                      ItemTapped="ListUser_ItemTapped"
+                      x:Name="ListUser">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="10"
+                                   Padding="5"
+                                   Margin="5" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <!--Ảnh đại diện của danh sách cá nhân-->
+                                    <StackLayout
+                                                Grid.Column="0"
+                                                Grid.Row="0"
+                                                Grid.RowSpan="2"
+                                                HorizontalOptions="CenterAndExpand"
+                                                VerticalOptions="StartAndExpand">
+                                        <forms:CachedImage Source="{Binding Avatar_Uri}"
+                                                                  Aspect="AspectFill"
+                                                                  HeightRequest="40" 
+                                                                  WidthRequest="40">
+                                            <forms:CachedImage.Transformations>
+                                                <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                                            </forms:CachedImage.Transformations>
+                                        </forms:CachedImage>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="0"
+                                                 Orientation="Vertical"
+                                                 Grid.Column="1">
+                                        <Label Text="{Binding fullname}"
+                                               FontSize="Small"
+                                               TextColor="Black"/>
+                                        <StackLayout
+                                               Orientation="Horizontal">
+                                            <Label Text="{Binding Level}"
+                                                   FontSize="Small"/>
+                                            <Label Text="{Binding AccepLevel}"
+                                                   FontSize="Small"
+                                                   TextColor="Blue"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout
+                                         Orientation="Vertical"
+                                         Grid.Row="1"
+                                         Grid.Column="1">
+                                        <Label Text="{Binding Facebat, StringFormat='Mặt vợt: {0}'}"
+                                               FontSize="Small"/>
+                                        <Label Text="{Binding Blade, StringFormat='Cốt vợt: {0}'}"
+                                               FontSize="Small"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="1"
+                                                 Grid.Column="2">
+                                        <Image Source="{Binding Challenge}"
+                                               Aspect="AspectFit"
+                                               HeightRequest="20"
+                                               WidthRequest="20"
+                                               HorizontalOptions="CenterAndExpand"
+                                               VerticalOptions="EndAndExpand">
+                                        </Image>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                    
+                                    <StackLayout Grid.Row="1"
+                                                 Grid.Column="3">
+                                        <Image 
+                                          HeightRequest="20"
+                                          WidthRequest="20"
+                                          Source="{Binding AddFriend}"
+                                          Aspect="AspectFit"
+                                          HorizontalOptions="CenterAndExpand"
+                                          VerticalOptions="EndAndExpand"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                    
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

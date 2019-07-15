@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="AppBongBan.Views.Groups.Checkins.CheckInPage"
+             Title="Thêm Check in">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Đăng" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout 
+                    BackgroundColor="Gray"
+                    Padding="5"
+                    Orientation="Vertical" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                <Label Text="{Binding CheckVM.MyClub.ClubName}"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding CheckVM.MyClub.TextShow}"
+                       TextColor="Black"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <controls:FlowListView 
+                          VerticalOptions="FillAndExpand"
+                          x:Name="listItems"
+                          FlowItemsSource="{Binding CheckVM.Images}"
+                          FlowColumnCount="3"
+						  SeparatorVisibility="None"
+						  HasUnevenRows="True" >
+                    <controls:FlowListView.Header>
+                        <StackLayout>
+                            <Label Margin="5"
+                                   Text="Bạn đang nghĩ gì?"/>
+                            <iview:MyEditor 
+                                       FontSize="Small"
+                                       x:Name="enContent"
+                                       TextChanged="enContent_TextChanged"
+                                       HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </controls:FlowListView.Header>
+                    <controls:FlowListView.FlowColumnTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="10"
+                                   Margin="2"
+                                   Padding="2">
+                                <StackLayout Orientation="Vertical">
+                                    <forms:CachedImage
+                                            Source="Delete.png"
+                                            Aspect="AspectFill"
+                                            HeightRequest="20"
+                                            WidthRequest="20"
+                                            HorizontalOptions="EndAndExpand"
+                                            VerticalOptions="Start">
+                                        <forms:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DeleteImg"/>
+                                        </forms:CachedImage.GestureRecognizers>
+                                    </forms:CachedImage>
+                                    <forms:CachedImage
+                                        DownsampleToViewSize="true" 
+                                        AbsoluteLayout.LayoutFlags="All" 
+                                        HeightRequest="100" 
+                                        AbsoluteLayout.LayoutBounds="0,0,1,1"  
+                                        HorizontalOptions="FillAndExpand"
+                                        WidthRequest="100"
+                                        Source="{Binding UriTmp}"  
+                                        Aspect="AspectFill">
+                                    </forms:CachedImage>
+                                    <ProgressBar HorizontalOptions="FillAndExpand"
+                                                 ProgressColor="Blue"
+                                                 Progress="{Binding Progess}"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </controls:FlowListView.FlowColumnTemplate>
+                </controls:FlowListView>
+            </StackLayout>
+            <StackLayout
+                    Padding="5"
+                    BackgroundColor="Gray"
+                    HeightRequest="50"
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="EndAndExpand">
+                <Image 
+                    Source="photo_camera.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

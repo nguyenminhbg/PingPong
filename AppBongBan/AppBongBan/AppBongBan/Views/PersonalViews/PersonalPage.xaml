@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<badge:BottomTabbedPage
+             xmlns:badge="clr-namespace:AppBongBan.Custom.Badge" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppBongBan.Views.PersonalViews.PersonalPage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:personalviews="clr-namespace:AppBongBan.Views.PersonalViews"
+             xmlns:chat="clr-namespace:AppChat.Views.Chat;assembly=AppChat"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.BarSelectedItemColor="White"
+             android:TabbedPage.ToolbarPlacement="Bottom" 
+             Labels="True"
+             android:TabbedPage.IsSwipePagingEnabled="false"
+             xmlns:news="clr-namespace:AppBongBan.Views.News"
+            BarBackgroundColor="#009dfe">
+    <badge:BottomTabbedPage.ToolbarItems>
+        <ToolbarItem x:Name="Notifi" Clicked="Notifi_Clicked" Order="Primary" Priority="0" Icon="notification.png"/>
+        <ToolbarItem Icon="search.png" Clicked="ToolbarItem_Clicked" Priority="1" x:Name="search" Order="Primary"/>
+    </badge:BottomTabbedPage.ToolbarItems>
+    <news:NewsSitePage Title="Trang chủ" Icon="home.png"/>
+    <chat:ConversationPage Title="Trò chuyện" Icon="comment.png" 
+                           badge:TabBadge.BadgeColor="Red"
+                           badge:TabBadge.BadgeTextColor="White"
+                           x:Name="conversation"/>
+    <chat:ContactsPage Title="Danh bạ" Icon="ContactImg.png"/>
+    <personalviews:MorePage Title="Thêm" Icon="more.png"/>
+</badge:BottomTabbedPage>

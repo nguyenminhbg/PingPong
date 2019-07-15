@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:AppBongBan.Custom"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:custom1="clr-namespace:AppChat.Custom;assembly=AppChat"
+             x:Class="AppBongBan.Views.IView.ClubView"
+             BackgroundColor="#D8D8D8">
+    <ContentView.Content>
+        <custom1:KeyboardStack>
+            <StackLayout 
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Vertical"
+                Margin="5">
+                <Grid VerticalOptions="CenterAndExpand"
+                      HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <!--<Frame CornerRadius="5"
+                           Padding="0"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           HasShadow="False"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Start">-->
+                    <forms:CachedImage
+                                  Grid.Row="0"
+                             Grid.Column="0"
+                             HeightRequest="60"
+                             WidthRequest="60"
+                        x:Name="avarta"
+                             Aspect="AspectFit"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             Source="{Binding AddClubViewModel.AvatarClub}"/>
+                    <!--</Frame>-->
+                    <!--button chọn thêm ảnh-->
+                    <Image
+                           Grid.Row="0"
+                           Grid.Column="0"
+                        x:Name="ImgAdd"
+                        VerticalOptions="End"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="add_a_photo.png">
+                    </Image>
+                </Grid>
+                <!--<ProgressBar Progress="{Binding AddClubViewModel.Progress}"
+                             ProgressColor="Blue"/>-->
+            </StackLayout>
+            <Frame Padding="5"
+                   CornerRadius="5"
+                   Margin="5"
+                   BackgroundColor="White">
+                <ScrollView x:Name="scroll">
+                    <custom1:KeyboardStack Orientation="Vertical">
+                        <Grid Margin="10,0,10,0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <!--Hàng thông báo lỗi-->
+                                <RowDefinition Height="0"/>
+                                <!--Hàng điền tên club-->
+                                <RowDefinition Height="Auto"/>
+                                <!--Hàng mô tả về Clb-->
+                                <RowDefinition Height="Auto"/>
+                                <!--Hàng Title Điền-->
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="0"/>
+                                <!--Hàng điền địa chỉ-->
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                            </Grid.RowDefinitions>
+                            <!--Tên câu lạc bộ hàng 0-->
+                            <Label 
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"                           
+                            FontAttributes="Bold"
+                            Text="Đặt tên câu lạc bộ:"
+                            TextColor="Black"/>
+                            <!--Thông báo lỗi hàng 1-->
+                            <StackLayout 
+                                IsVisible="False"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Orientation="Horizontal"
+                            HeightRequest="30">
+                                <Label     HorizontalOptions="StartAndExpand"
+                                       TextColor="Red"
+                                       FontSize="Micro"
+                                       LineBreakMode="WordWrap"
+                                       x:Name="lbNotifi"
+                                       Text="{Binding AddClubViewModel.lbNotifi, Mode=TwoWay}"/>
+                                <Label 
+                                       x:Name="lbName"
+                                    
+                                       FontSize="Micro"
+                                       HorizontalOptions="EndAndExpand"
+                                       VerticalOptions="EndAndExpand"
+                                       Text="0/150"/>
+                            </StackLayout>
+                            <!--Điền tên club hàng 2-->
+                            <StackLayout Padding="0"
+                                         Spacing="0"
+                                         Grid.Row="2"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="3">
+                                <custom:ExtendedEditorControl
+                                     x:Name="fillName"
+                                    FontSize="12"
+                                    
+                                      IsExpandable="true"
+                                     TextChanged="fillName_TextChanged"
+                                     VerticalOptions="FillAndExpand"
+                                     Text="{Binding AddClubViewModel.NewClub.ClubName, Mode=TwoWay}"
+                                     HorizontalOptions="FillAndExpand"
+                                     Placeholder="Điền Tên câu lạc bộ" />
+                                <BoxView HeightRequest="1"
+                                         HorizontalOptions="FillAndExpand"
+                                         Margin="5,0,5,0"
+                                         BackgroundColor="#009dfe"/>
+                            </StackLayout>
+
+                            <!--Hàng mô tả clb-->
+                            <StackLayout Grid.Row="3"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="3"
+                                          Padding="0"
+                                          Spacing="0">
+                                <Label   FontSize="12"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       Text="Mô tả chung:"/>
+                                <custom:ExtendedEditorControl
+                                   x:Name="MyEditor"
+                                    Text="{Binding AddClubViewModel.NewClub.Description}"
+                                  FontSize="12"
+                                    Placeholder="Điền mô tả câu lạc bộ"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="EndAndExpand"/>
+                                <BoxView HeightRequest="1"
+                                         HorizontalOptions="FillAndExpand"
+                                          Margin="5,0,5,0"
+                                         BackgroundColor="#009dfe"/>
+                            </StackLayout>
+
+                            <!--Địa chỉ câu lạc bộ hàng 3-->
+                            <Label 
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"  
+                                FontSize="12"
+                            Text="Địa chỉ câu lạc bộ:"
+                            FontAttributes="Bold"
+                            TextColor="Black"/>
+                            <!--Thông báo lỗi hàng 4-->
+                            <StackLayout 
+                                     Grid.Row="5"
+                                IsVisible="False"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="3"
+                                     Orientation="Horizontal" 
+                                     HeightRequest="30"
+                                     VerticalOptions="Start">
+                                <Label HorizontalOptions="StartAndExpand"
+                                   TextColor="Red"
+                                  FontSize="12"
+                                       
+                                   LineBreakMode="WordWrap"
+                                   Text="{Binding AddClubViewModel.lbNotifiAddress, Mode=TwoWay}"
+                                   x:Name="lbNotifiAddress"/>
+                                <Label x:Name="lbAddress"
+                                   FontSize="12"
+                                   HorizontalOptions="EndAndExpand"
+                                   VerticalOptions="EndAndExpand"
+                                   Text="0/500"/>
+                            </StackLayout>
+                            <!--ĐHại chỉ nhà hàng 5-->
+                            <Label Grid.Row="6"
+                               Grid.Column="0"
+                                   FontSize="12"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Địa chỉ nhà:"
+                               TextColor="Black"/>
+                            <StackLayout Grid.Row="6"
+                                         Grid.Column="1"
+                                         Grid.ColumnSpan="2"
+                                         Spacing="0"
+                                         Padding="0">
+                                <custom:ExtendedEditorControl
+                                    FontSize="12"
+                                    
+                                      MinimumHeightRequest="45"
+                                      IsExpandable="True"
+                                      TextChanged="fillStreet_TextChanged"
+                                      x:Name="fillStreet"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"
+                                      Text="{Binding AddClubViewModel.NewClub.StreetAddress, Mode=TwoWay}"
+                                      Placeholder="Điền địa chỉ nhà"
+                                      Margin="0"/>
+                                <BoxView HeightRequest="1"
+                                         HorizontalOptions="FillAndExpand"
+                                          Margin="5,0,5,0"
+                                         BackgroundColor="#009dfe"/>
+                            </StackLayout>
+
+                            <!--Địa chỉ xã hàng 6-->
+                            <Label Grid.Row="7"
+                               Grid.Column="0"
+                                   FontSize="12"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Xã/Phường:"
+                               TextColor="Black"/>
+                            <Frame
+                             Padding="2"
+                             CornerRadius="5"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="2"
+                            BackgroundColor="White"
+                                BorderColor="Gray"
+                            HasShadow="False"
+                             Grid.Row="7">
+                                <StackLayout Orientation="Horizontal"
+                                         HeightRequest="35"
+                                         VerticalOptions="FillAndExpand"
+                                         HorizontalOptions="FillAndExpand">
+                                    <Label
+                                        FontSize="12"
+                                   Margin="5,0,0,0"
+                                   VerticalOptions="FillAndExpand"
+                                   Text="{Binding AddClubViewModel.CommunWar}"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="StartAndExpand"
+                                    TextColor="Gray"/>
+                                    <Image Source="SelectDropdown.png"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                            Margin="5,0,5,0"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddClubViewModel.SelectedCommunWarCmd}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <Label Grid.Row="8"
+                               Grid.Column="0"
+                                   FontSize="12"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Huyện/Quận:"
+                               TextColor="Black"/>
+                            <Frame
+                            Padding="2"
+                            Grid.Row="8"
+                                  BorderColor="Gray"
+                            CornerRadius="5"
+                            Grid.ColumnSpan="2"
+                            Grid.Column="1"
+                            BackgroundColor="White"
+                            HasShadow="False">
+                                <StackLayout Padding="0" Spacing="0"
+                                HeightRequest="35"
+                                Orientation="Horizontal"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand">
+                                    <Label 
+                                        FontSize="12"
+                                     Margin="5,0,0,0"
+                                     VerticalOptions="FillAndExpand"
+                                     Text="{Binding AddClubViewModel.District}"
+                                     VerticalTextAlignment="Center"
+                                     HorizontalOptions="StartAndExpand"
+                                    TextColor="Gray"/>
+                                    <Image Source="SelectDropdown.png"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                            Margin="5,0,5,0"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddClubViewModel.SelectedDistrict}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <!--<custom:CustomEntry 
+                            BackgroundColor="#F2F2F2" 
+                            Placeholder="Chọn huyện/quận"
+                            Grid.Row="5"
+                            x:Name="fillDistrict"
+                            Text="{Binding NewClub.DistrictAddress ,Mode=TwoWay}"
+                            Grid.Column="1"/>-->
+                            <!--Thành phố hàng 8-->
+                            <Label Grid.Row="9"
+                               Grid.Column="0"
+                                   FontSize="12"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Tỉnh/Thành phố:"
+                               TextColor="Black"/>
+                            <Frame
+                             Padding="2"
+                             Grid.Row="9"
+                                  BorderColor="Gray"
+                             Grid.ColumnSpan="2"
+                             CornerRadius="5"
+                             Grid.Column="1"
+                            BackgroundColor="White"
+                            HasShadow="False">
+                                <StackLayout
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                Orientation="Horizontal">
+                                    <Label 
+                                        FontSize="12"
+                                     Margin="5,0,0,0"
+                                     VerticalOptions="FillAndExpand"
+                                     Text="{Binding AddClubViewModel.Province}"
+                                     VerticalTextAlignment="Center"
+                                     HorizontalOptions="StartAndExpand" 
+                                    TextColor="Gray"/>
+                                    <Image Source="SelectDropdown.png"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                           Margin="5,0,5,0"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddClubViewModel.SelectedCity}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <!--<custom:CustomEntry 
+                               BackgroundColor="#F2F2F2" 
+                               Placeholder="Chọn tỉnh/thành phố"
+                               Grid.Row="6"
+                               x:Name="fillCity"
+                               Text="{Binding NewClub.ProvinceCityAddress ,Mode=TwoWay}"
+                               Grid.Column="1"/>-->
+                            <!--Quốc gia hàng 9-->
+                            <Label Grid.Row="10"
+                                   FontSize="12"
+                               Grid.Column="0"
+                               HeightRequest="35"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Quốc gia:"
+                               TextColor="Black"/>
+                            <Frame
+                            Grid.Row="10"
+                            Grid.Column="2"
+                                  BorderColor="Gray"
+                            Padding="2"
+                            CornerRadius="5"
+                            HasShadow="False"
+                            BackgroundColor="White">
+                                <custom:CustomEntry  
+                               Text="Việt Nam"
+                                    FontSize="12"
+                               TextColor="Gray"
+                               IsEnabled="False"/>
+                            </Frame>
+                            <!--Số điện thoại hàng 11-->
+                            <Label Grid.Row="11"
+                                   FontSize="12"
+                               Grid.Column="0"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Số điện thoại:"
+                               TextColor="Black"/>
+                            <StackLayout  Grid.Row="11"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                          Spacing="0"
+                                          Padding="0"
+                                          VerticalOptions="FillAndExpand">
+                                <Frame
+                                     Padding="2"
+                                     BorderColor="Gray"
+                                     CornerRadius="5"
+                                    VerticalOptions="FillAndExpand"
+                                     BackgroundColor="White"
+                                     HasShadow="False">
+                                    <custom:CustomEntry 
+                                        VerticalOptions="FillAndExpand"
+                                       Margin="0"
+                                       FontSize="12"
+                                       x:Name="fillPhoneNumber"
+                                    HorizontalOptions="StartAndExpand"
+                                       Keyboard="Telephone"
+                                       PlaceholderColor="Gray"
+                                       Placeholder="Điền số điện thoại liên hệ"
+                                      Text="{Binding AddClubViewModel.NewClub.ClubPhoneNumber ,Mode=TwoWay}"/>
+                                </Frame>
+                                <!--<BoxView HeightRequest="1"
+                                         HorizontalOptions="FillAndExpand"
+                                         Margin="5,0,5,0"
+                              >       BackgroundColor="#009dfe"/>-->
+                            </StackLayout>
+                            <!--Mô tả nhóm hàng 12-->
+                            <Label Grid.Row="12"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"  
+                                   FontSize="12"
+                               Text="Mô tả nhóm:"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                            <!--Ngày thành lập hàng 13-->
+                            <StackLayout Grid.Row="13"
+                                         Grid.Column="0"
+                                         Orientation="Horizontal"
+                                         HorizontalOptions="FillAndExpand">
+                                <Image
+                                    HorizontalOptions="Start"
+                                    Source="calendar.png"
+                                    HeightRequest="35"
+                                    WidthRequest="35">
+                                </Image>
+                                <Label 
+                                      VerticalOptions="CenterAndExpand"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Ngày thành lập:"
+                                    FontSize="12"
+                                    TextColor="Black"/>
+
+                            </StackLayout>
+                            <Frame  Grid.Row="13"
+                                         Grid.Column="1"
+                                         Grid.ColumnSpan="2"
+                              CornerRadius="5"
+                              Padding="0"
+                                HeightRequest="35"
+                                BorderColor="Gray"
+                              x:Name="Calendar"
+                            BackgroundColor="White"
+                            HasShadow="False">
+                                <Label 
+                                   TextColor="Black"
+                                        FontSize="12"
+                                   HorizontalOptions="FillAndExpand"
+                                   HeightRequest="35"
+                                   Parent="5"
+                                   VerticalTextAlignment="Center"
+                                   VerticalOptions="CenterAndExpand"
+                                   Text="{Binding AddClubViewModel.SelectDate ,Mode=TwoWay}"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddClubViewModel.CalendarCmd}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!--Thời gian mở hàng 14-->
+                            <StackLayout   Grid.Column="0"
+                                           Grid.Row="14"
+                                           Orientation="Horizontal"
+                                           HorizontalOptions="FillAndExpand">
+                                <Image
+                                   HorizontalOptions="Start"
+                                   Source="clock.png"
+                                   HeightRequest="35"
+                                   WidthRequest="35">
+                                </Image>
+                                <Label 
+                                   FontSize="12"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Thời gian mở:"
+                               TextColor="Black"/>
+                            </StackLayout>
+
+                            <Frame CornerRadius="5"
+                               Grid.Row="14"
+                              BorderColor="Gray"
+                               Grid.Column="1"
+                               Grid.ColumnSpan="2"
+                               Padding="0"
+                               BackgroundColor="White"
+                               HasShadow="False">
+                                <Label 
+                                        FontSize="12"
+                                    HorizontalOptions="FillAndExpand"
+                                    HeightRequest="35"
+                                    TextColor="Black"
+                                    Parent="5"
+                                    VerticalTextAlignment="Center"
+                                    VerticalOptions="CenterAndExpand"
+                                    Text="{Binding AddClubViewModel.SelectOpenTime ,Mode=TwoWay}"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddClubViewModel.OpenTimeCmd}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <!--Thời gian đóng hàng 15-->
+                            <StackLayout Grid.Row="15"
+                                        Grid.Column="0"
+                                         Orientation="Horizontal"
+                                         HorizontalOptions="FillAndExpand">
+                                <Image
+                                   HorizontalOptions="Start"
+                                   Source="clock.png"
+                                   HeightRequest="35"
+                                   WidthRequest="35">
+                                </Image>
+                                <Label 
+                                   FontSize="12"
+                               VerticalOptions="CenterAndExpand"
+                               Text="Thời gian đóng:"
+                               TextColor="Black"/>
+                            </StackLayout>
+
+                            <Frame
+                             Grid.Row="15"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="2"
+                             Padding="0"
+                                  BorderColor="Gray"
+                             CornerRadius="5"
+                            HasShadow="False"
+                            BackgroundColor="White">
+                                <Label HorizontalOptions="FillAndExpand"
+                                   HeightRequest="35"
+                                   TextColor="Black"
+                                   Parent="5"
+                                           FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   VerticalOptions="CenterAndExpand"
+                                   Text="{Binding AddClubViewModel.SelectCloseTime ,Mode=TwoWay}"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddClubViewModel.CloseTimeCmd}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </Grid>
+                    </custom1:KeyboardStack>
+                </ScrollView>
+            </Frame>
+
+        </custom1:KeyboardStack>
+    </ContentView.Content>
+</ContentView>

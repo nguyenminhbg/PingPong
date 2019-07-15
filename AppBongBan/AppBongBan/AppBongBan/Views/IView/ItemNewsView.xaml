@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:labelTextColorSample="clr-namespace:AppBongBan.Custom"
+             x:Class="AppBongBan.Views.IView.ItemNewsView">
+    <!--style cho hình ảnh-->
+    <ContentView.Resources>
+        <Style x:Key="flex" TargetType="FlexLayout">
+            <Setter Property="Direction" Value="Row"/>
+            <Setter Property="Wrap" Value="Wrap"/>
+            <Setter Property="AlignItems" Value="Stretch"/>
+            <Setter Property="AlignContent" Value="Start"/>
+        </Style>
+        <StyleSheetExtension Source="/Views/IView/PhotosPage.css"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout Margin="0,5,0,5"
+            Orientation="Vertical">
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,0,0,3">
+                <forms:CachedImage
+                   Source="{Binding Accounts.Avatar_Uri}"
+                   Aspect="AspectFit"
+                   DownsampleToViewSize="True"
+                   HeightRequest="40"
+                   WidthRequest="40">
+                    <forms:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#011111"/>
+                    </forms:CachedImage.Transformations>
+                </forms:CachedImage>
+                <!--Tên với người đăng và Club người đăng-->
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Accounts.fullname}"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               FontSize="Small"/>
+                        <Label Text="{Binding clubContent.ClubName, StringFormat='> {0}'}"
+                               IsVisible="{Binding IsNews}"
+                               LineBreakMode="WordWrap"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               FontSize="Small"/>
+                    </StackLayout>
+                    <!--Chi tiết-->
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Detail.TextRelation}"
+                               IsVisible="{Binding Detail.isRelative}"
+                               HorizontalOptions="Start"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="11"
+                               TextColor="Gray"/>
+                        <Label FontSize="11"
+                               TextColor="Gray"
+                               VerticalOptions="CenterAndExpand"
+                               Text="{Binding Detail.DateCreated}"/>
+                    </StackLayout>
+                </StackLayout>
+                <!--Tác vụ với dữ liệu-->
+                <StackLayout HorizontalOptions="EndAndExpand">
+                    <Image
+                        VerticalOptions="Start"
+                        HorizontalOptions="EndAndExpand"
+                        HeightRequest="20"
+                        WidthRequest="20"
+                        Source="more_vert.png"/>
+                </StackLayout>
+            </StackLayout>
+            <!--Nội dung và tiêu đề bản tin-->
+            <StackLayout
+                    Orientation="Vertical"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="0,0,0,3">
+                <!--tiêu đề bài viết-->
+                <Label 
+                       Text="{Binding Detail.Title}"
+                        IsVisible="{Binding Detail.Isvisible}"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       FontSize="Small"                       
+                       HorizontalOptions="FillAndExpand"/>
+                <!--nội dung bài viết-->
+                <Label 
+                       Text="{Binding Detail.DetailContent.Text}"
+                       IsVisible="{Binding Detail.IsvisibleContent}"
+                       TextColor="Black"
+                       FontSize="Small"
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <!--Hiển thị ảnh với 4 ảnh-->
+            <Grid
+                    x:Name="LayoutFour"
+                    ColumnSpacing="1"
+                    RowSpacing="1"
+                    IsVisible="{Binding  Detail.DetailContent.image_4.IsVisible}"
+                   Margin="0,0,0,3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Ảnh thứ 1-->
+                <forms:CachedImage
+                         Grid.Column="0"
+                         Grid.Row="0"
+                         x:Name="fourOne"
+                         Aspect="AspectFill"
+                         HeightRequest="150"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand"
+                         Source="{Binding  Detail.DetailContent.image_1.uri}"/>
+                <!--Ảnh thứ 2-->
+                <forms:CachedImage 
+                         Grid.Column="1"
+                         Grid.Row="0"
+                    x:Name="fourTwo"
+                         HeightRequest="150"
+                         Aspect="AspectFill"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding  Detail.DetailContent.image_2.uri}"/>
+                <!--Ảnh thứ 3-->
+                <forms:CachedImage 
+                    x:Name="fourThree"
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         HeightRequest="150"
+                         Aspect="AspectFill"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding  Detail.DetailContent.image_3.uri}"/>
+                <!--Ảnh thứ 4-->
+                <forms:CachedImage
+                            Grid.Column="1"
+                            Grid.Row="1"
+                    
+                            HeightRequest="150"
+                            Aspect="AspectFill"
+                            DownsampleToViewSize="True"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Source="{Binding  Detail.DetailContent.image_4.uri}"/>
+                <Label Text="{Binding Detail.NumberCreate, StringFormat='+ {0}'}"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                       x:Name="fourLbl"
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           TextColor="White"
+                           IsVisible="{Binding Detail.isNumberImage}"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+            </Grid>
+            <!--Hiển thị ảnh với 3 ảnh-->
+            <FlexLayout
+                    x:Name="LayoutThree"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.RowSpan="2"
+                    IsVisible="{Binding  Detail.DetailContent.image_3.IsVisible}"
+                    Style="{StaticResource flex}"
+                 Margin="0,0,0,3">
+                <!--Ảnh thứ 1-->
+                <forms:CachedImage
+                         Aspect="AspectFill"
+                         Margin="1"
+                        x:Name="threeimg1"
+                         StyleClass="quarter"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding  Detail.DetailContent.image_1.uri}"/>
+                <!--Ảnh thứ 2-->
+                <forms:CachedImage
+                         Aspect="AspectFill"
+                         Margin="1"
+                      x:Name="threeimg2"
+                         StyleClass="quarter"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding  Detail.DetailContent.image_2.uri}"/>
+                <!--Ảnh thứ 3-->
+                <forms:CachedImage
+                         Aspect="AspectFill"
+                         Margin="1"
+                        x:Name="threeimg3"
+                         StyleClass="fullhalf"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding  Detail.DetailContent.image_3.uri}"/>
+            </FlexLayout>
+            <!--Hiển thị ảnh với 2 ảnh-->
+            <FlexLayout
+                    x:Name="LayoutTwo"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.RowSpan="2"
+                    IsVisible="{Binding  Detail.DetailContent.image_2.IsVisible}"
+                    Style="{StaticResource flex}"
+                    Margin="0,0,0,3">
+                <!--Ảnh thứ 1-->
+                <forms:CachedImage
+                         Aspect="AspectFill"
+                         Margin="1"
+                         x:Name="twoimg1"
+                         StyleClass="quarter"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding  Detail.DetailContent.image_1.uri}"/>
+                <!--Ảnh thứ 2-->
+                <forms:CachedImage
+                         Aspect="AspectFill"
+                         Margin="1"
+                         x:Name="twoimg2"
+                         StyleClass="quarter"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding  Detail.DetailContent.image_2.uri}"/>
+            </FlexLayout>
+            <!--Hiển thị ảnh với 1 ảnh-->
+            <FlexLayout
+                    x:Name="LayoutOne"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.RowSpan="2"
+                    IsVisible="{Binding  Detail.DetailContent.image_1.IsVisible}"
+                    Style="{StaticResource flex}"
+                   Margin="0,0,0,3">
+                <!--Ảnh thứ 1-->
+                <forms:CachedImage
+                         Aspect="AspectFill"
+                         Margin="1"
+                         StyleClass="full"
+                         x:Name="oneimg"
+                         DownsampleToViewSize="True"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         Source="{Binding  Detail.DetailContent.image_1.uri}"/>
+            </FlexLayout>
+            <!--Hiển thị danh sách like và bình luận-->
+            <StackLayout 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                 Margin="0,0,0,3">
+                <Label 
+                        VerticalOptions="CenterAndExpand"
+                        FontSize="Micro"
+                        Text="{Binding LikeContent.LikeCount, 
+                        StringFormat='{0:D} thích'}"/>
+                <Label
+                        FontSize="Micro"
+                        VerticalOptions="CenterAndExpand"
+                        Text="{Binding CommentCount, 
+                        StringFormat='{0:D} bình luận'}"/>
+            </StackLayout>
+            <!--Các tác vụ bình luận, share, like-->
+            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+            <Grid 
+                      Grid.Column="0"
+                      Grid.Row="3"
+                      Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--tác vụ thích-->
+                <StackLayout 
+                        x:Name="like"
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                    HorizontalOptions="CenterAndExpand">
+                    <forms:CachedImage 
+                            VerticalOptions="CenterAndExpand"
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            Source="{Binding LikeContent.IconLike}"/>
+                    <Label 
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            TextColor="{Binding LikeContent.LikeColor,  Converter={StaticResource StringToColorConverter}}"
+                            Text="Thích"/>
+                </StackLayout>
+                <!--Tác vụ bình luận-->
+                <StackLayout 
+                        x:Name="Comment"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                    HorizontalOptions="CenterAndExpand">
+                    <Image
+                            VerticalOptions="CenterAndExpand"
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            Source="icon_comment.png"/>
+                    <Label 
+                            FontSize="13"
+                            VerticalOptions="CenterAndExpand"
+                            FontAttributes="Bold"
+                            TextColor="#5D6A76"
+                            Text="Bình luận"/>
+                </StackLayout>
+                <!--Tác vụ chia sẻ-->
+                <StackLayout 
+                        x:Name="share"
+                        Grid.Column="2"
+                        Orientation="Horizontal"
+                    HorizontalOptions="CenterAndExpand">
+                    <Image
+                            VerticalOptions="CenterAndExpand"
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            Source="share.png"/>
+                    <Label 
+                            FontSize="13"
+                            TextColor="Gray"
+                            VerticalOptions="CenterAndExpand"
+                            Text="Chia sẻ"/>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

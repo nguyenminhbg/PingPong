@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             xmlns:listviewcustom="clr-namespace:AppBongBan.Custom.ListViewCustom"
+             x:Class="AppBongBan.Views.Groups.ClubSearchPage"
+             Title="Club"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid CompressedLayout.IsHeadless="True"
+                  Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+                <SearchBar  HeightRequest="50"
+                            FontSize="Small"
+                            x:Name="MySearch"
+                            TextColor="Black"
+                            PlaceholderColor="White"
+                            CancelButtonColor="White"
+                            Grid.Column="0"
+                            TextChanged="MySearch_TextChanged"/>
+                <iview:CustomPicker   HeightRequest="50" 
+                                      FontSize="Small"
+                                      x:Name="Picker"
+                                      Image="ic_arrow_drop_down"
+                                       Title="Chọn mục tìm kiếm"
+                                      Grid.Column="1"
+                                      SelectedIndexChanged="Picker_SelectedIndexChanged">
+                    <iview:CustomPicker.Items>
+                        <x:String>Gần tôi</x:String>
+                        <x:String>Khu vực</x:String>
+                    </iview:CustomPicker.Items>
+                    <iview:CustomPicker.SelectedIndex>0</iview:CustomPicker.SelectedIndex>
+                </iview:CustomPicker>
+            </Grid>
+            <!--Hiển thị gợi ý tìm kiếm-->
+                <ListView  x:Name="lvAutoComplete"
+                           HasUnevenRows="True"
+                           IsVisible="{Binding clubSearch.suggesIsVisible}"
+                           ItemTapped="LvAutoComplete_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
+                                         CompressedLayout.IsHeadless="True">
+                                <Label Text="{Binding TextShow}"
+                                       Margin="10"
+                                       TextColor="#103763"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="Start"/>
+                                <Image
+                                    Source="arrow_left.png"
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="CenterAndExpand"
+                                    HeightRequest="30"
+                                    WidthRequest="30"
+                                    Margin="10"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                </ListView>
+                <!--Hiển thị kết quả tìm kiếm theo khu vực gần tôi-->
+            <StackLayout VerticalOptions="FillAndExpand"
+                         CompressedLayout.IsHeadless="True">
+                <Label Text="Không tìm thấy Club"
+                       TextColor="#f15a25"
+                       IsVisible="{Binding clubSearch.IsClubNull}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="CenterAndExpand"/>
+                <listviewcustom:ListviewOfScroll HasUnevenRows="True"
+                                                 ItemsSource="{Binding clubSearch.ListClub}"
+                                                 x:Name="nearSearch"
+                                                 IsPullToRefreshEnabled="True"
+                                                 SeparatorVisibility="None"
+                                                 SeparatorColor="Transparent"
+                                                 IsRefreshing="{Binding clubSearch.isFreshing}"
+                                                 Refreshing="NearSearch_Refreshing"
+                                                 ItemTapped="NearSearch_ItemTapped"
+                                                 ItemAppearing="NearSearch_ItemAppearing">
+                    <x:Arguments>
+                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                    </x:Arguments>
+                    <listviewcustom:ListviewOfScroll.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell CompressedLayout.IsHeadless="True">
+                                <StackLayout Spacing="0" Padding="0">
+                                    <BoxView HeightRequest="8"
+                                         HorizontalOptions="Fill"
+                                         VerticalOptions="Fill"
+                                         BackgroundColor="#D8D8D8"/>
+                                    <iview:ItemClubView
+                                    TapChall="ItemClubView_TapChall"
+                                    TapCheckin="ItemClubView_TapCheckin"
+                                    TapMap="ItemClubView_TapMap"
+                                    TapJoin="ItemClubView_TapJoin"
+                                    TapListUsr="ItemClubView_TapListUsr"/>
+                                </StackLayout>
+                           
+                            </ViewCell>
+                        </DataTemplate>
+                    </listviewcustom:ListviewOfScroll.ItemTemplate>
+                </listviewcustom:ListviewOfScroll>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

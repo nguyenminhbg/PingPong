@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:AppBongBan.Views.IView"
+             x:Class="AppBongBan.Views.Groups.SearchLocationPage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="Tìm kiếm khu vực">
+    <ContentPage.Content>
+        <RelativeLayout>
+            <SearchBar
+                RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                Factor=.7,
+                Type=RelativeToParent}"
+                HeightRequest="50"
+                FontSize="Small"
+                x:Name="MySearch"
+                TextColor="Black"
+                PlaceholderColor="White"
+                CancelButtonColor="White"
+                SearchButtonPressed="Search_SearchButtonPressed"
+                TextChanged="Search_TextChanged"/>
+            <!--Chọn tìm kiếm gần tôi hoặc tìm kiếm khu vực-->
+            <controls:CustomPicker
+                     RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                     Factor=.7,
+                     Type=RelativeToParent}"
+                     RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                     Factor=.3,
+                     Type=RelativeToParent}"
+                     SelectedIndexChanged="CustomPicker_SelectedIndexChanged"
+                     HeightRequest="50" 
+                     FontSize="Small"
+                     x:Name="Picker"
+                     Image="ic_arrow_drop_down"
+                     Title="Chọn mục tìm kiếm">
+                <controls:CustomPicker.Items>
+                    <x:String>Gần tôi</x:String>
+                    <x:String>Khu vực</x:String>
+                </controls:CustomPicker.Items>
+                <controls:CustomPicker.SelectedIndex>0</controls:CustomPicker.SelectedIndex>
+            </controls:CustomPicker>
+            <!--Menu Gần tôi-->
+            <StackLayout
+                x:Name="TabPerson"
+                BackgroundColor="#f15a25"
+                RelativeLayout.YConstraint="50"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width, Factor=.5, Type=RelativeToParent}"
+                HeightRequest="50"
+                Padding="0">
+                <StackLayout VerticalOptions="CenterAndExpand"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="CenterAndExpand">
+                    <forms:CachedImage
+                                Margin="5"
+                                VerticalOptions="CenterAndExpand"
+                                Source="account.png"
+                                HeightRequest="20"
+                                WidthRequest="20"/>
+                    <Label Text="Cá nhân"
+                               TextColor="White"
+                               VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapPersonAction"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+            <StackLayout
+                x:Name="TabClub"
+                Padding="0"
+                HeightRequest="50"
+                BackgroundColor="#787468"
+                RelativeLayout.YConstraint="50"
+                RelativeLayout.XConstraint="{ConstraintExpression Property=Width, Factor=.5, Type=RelativeToParent}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width, Factor=.5, Type=RelativeToParent}">
+                <StackLayout VerticalOptions="CenterAndExpand"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="CenterAndExpand">
+                        <forms:CachedImage
+                                 Margin="5"
+                                 VerticalOptions="CenterAndExpand"
+                                 Source="club.png"
+                                 HeightRequest="20"
+                                 WidthRequest="20"/>
+                        <Label Text="Club"
+                                 TextColor="White"
+                                 VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapClubAction"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+            <!--Danh sách tìm kiếm gần tôi-->
+            <StackLayout
+                x:Name="AccountLayout"
+                RelativeLayout.YConstraint="100"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                Factor=1,
+                Type=RelativeToParent}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                Factor=1,
+                Type=RelativeToParent,
+                Constant=-100}" Orientation="Vertical">
+                <Label Text="Không tìm thấy Cá nhân"
+                   TextColor="#f15a25"
+                   IsVisible="{Binding SearchLocation.IsAccNull}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand"/>
+                <ListView
+                    IsRefreshing="{Binding SearchLocation.IsLoadAcc, Mode=OneWay}"
+                    IsPullToRefreshEnabled="True"
+                    RefreshCommand="{Binding AccRefreshCmd}"
+                    ItemAppearing="LvDp_ItemAppearing"
+                    SeparatorVisibility="None"
+                    ItemsSource="{Binding SearchLocation.listAcc}"
+                    ItemTapped="LvDp_ItemTapped"
+                    HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <controls:ItemPerView
+                                    TapChall="ItemPerView_TapChall"
+                                    TapClub="ItemPerView_TapClub"
+                                    TapFriend = "View_TapFriend"
+                                    TapMap = "View_TapMap1"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <controls:LoadView/>
+            </StackLayout>
+            <!--Danh sách tìm kiếm theo club theo vị trí gần tôi-->
+            <StackLayout
+                x:Name="ClubLayout"
+                RelativeLayout.YConstraint="100"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                Factor=1,
+                Type=RelativeToParent}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                Factor=1,
+                Type=RelativeToParent,
+                Constant=-100}" Orientation="Vertical">
+                <Label Text="Không tìm thấy Club"
+                   TextColor="#f15a25"
+                   IsVisible="{Binding SearchLocation.IsClubNull}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand"/>
+                <ListView
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding SearchLocation.IsLoadClub, Mode=OneWay}"
+                    RefreshCommand="{Binding ClubFreshCmd}"
+                    ItemAppearing="LvDp_ItemAppearing"
+                    SeparatorVisibility="None"
+                    ItemTapped="LvDp_ItemTapped"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding SearchLocation.ListClub}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <controls:ItemClubView
+                                     TapChall="ItemClubView_TapChall"
+                                     TapJoin = "View_TapJoin"
+                                     TapMap = "View_TapMap"
+                                     TapCheckin="ItemClubView_TapCheckin"
+                                     TapListUsr = "View_TapListUsr"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <controls:LoadView/>
+            </StackLayout>
+            <!--Tìm kiếm club theo khu vực-->
+            <StackLayout
+                x:Name="TabClubArea"
+                Padding="0"
+                HeightRequest="50"
+                BackgroundColor="#787468"
+                RelativeLayout.YConstraint="50"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width, Factor=1, Type=RelativeToParent}">
+                <StackLayout VerticalOptions="CenterAndExpand"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="CenterAndExpand">
+                        <forms:CachedImage
+                                 Margin="5"
+                                 VerticalOptions="CenterAndExpand"
+                                 Source="club.png"
+                                 HeightRequest="20"
+                                 WidthRequest="20"/>
+                        <Label Text="Club"
+                                 TextColor="White"
+                                 VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </StackLayout>
+            <StackLayout
+                x:Name="AreatLayout"
+                RelativeLayout.YConstraint="100"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                Factor=1, Type=RelativeToParent}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height, Factor=1,
+                Type=RelativeToParent, Constant=-100}" Orientation="Vertical">
+                <Label Text="Không tìm thấy club"
+                       TextColor="#f15a25"
+                       IsVisible="{Binding SearchLocation.IsAreaNull}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="CenterAndExpand"/>
+                <ListView
+                    IsPullToRefreshEnabled="True"
+                    RefreshCommand="{Binding  AreaClubFreshCmd}"
+                    IsRefreshing="{Binding SearchLocation.IsLoadArea, Mode=OneWay}"
+                    ItemAppearing="LvDp_ItemAppearing"
+                    SeparatorVisibility="None"
+                    ItemTapped="LvDp_ItemTapped"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding SearchLocation.ListClubArea}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <controls:ItemClubView
+                                     TapChall="ItemClubView_TapChall"
+                                     TapJoin = "View_TapJoin"
+                                     TapMap = "View_TapMap"
+                                     TapCheckin="ItemClubView_TapCheckin"
+                                     TapListUsr = "View_TapListUsr"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <controls:LoadView/>
+            </StackLayout>
+            <!--Gợi ý tìm kiếm-->
+            <ListView
+                x:Name="lvAutoComplete"
+                SelectedItem="{Binding SearchLocation.SelectItemComplete}"
+                HasUnevenRows="True"
+                RelativeLayout.YConstraint="50"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width, Factor=1, Type=RelativeToParent}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height, Factor=1, Type=RelativeToParent, Constant=-50}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell >
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding TextShow}"
+                                       Margin="10"
+                                       TextColor="#103763"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="Start"/>
+                                <Image
+                                    Source="arrow_left.png"
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="CenterAndExpand"
+                                    HeightRequest="30"
+                                    WidthRequest="30"
+                                    Margin="10"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

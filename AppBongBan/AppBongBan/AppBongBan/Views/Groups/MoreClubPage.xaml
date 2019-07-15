@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="AppBongBan.Views.Groups.MoreClubPage"
+             Title="{Binding MyClub.ClubName}">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <iview:CommandClubView
+                TapAddImage="CommandClubView_TapAddImage"
+                TapAddNews="CommandClubView_TapAddNews"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                HeightRequest="50"/>
+            <ScrollView >
+                <StackLayout>
+                    <Frame CornerRadius="10"
+                           Padding="0"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="EndAndExpand"
+                           Margin="5,0,5,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="200"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <iview:HeaderMoreClubView Grid.Row="0"/>
+                            <StackLayout 
+                                     Grid.Row="1"
+                                     Padding="5">
+                                <!--Tên Club-->
+                                <Label Text="{Binding MyClub.ClubName}"
+                                   TextColor="Black"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Start"
+                                   HorizontalOptions="Start"/>
+                                <BoxView 
+                                   Margin="0,5,0,5"
+                                   HorizontalOptions="FillAndExpand" 
+                                   HeightRequest="1"
+                                   Color="Gray"/>
+                                <!--Thời ngày thành lập-->
+                                <Label Margin="5"
+                                   Text="{Binding MyClub.FoundDateTime, StringFormat='Ngày thành lập: {0}'}"/>
+                                <Label Margin="5"
+                                   Text="Mô tả chung:"/>
+                                <Frame>
+                                    <Label Text="{Binding MyClub.Description}"
+                                       LineBreakMode="WordWrap"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="Start"/>
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

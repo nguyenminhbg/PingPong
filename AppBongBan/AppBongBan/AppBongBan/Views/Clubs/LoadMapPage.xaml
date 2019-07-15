@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:googlemaps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="AppBongBan.Views.Clubs.LoadMapPage"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="AcceptPositon" Text="Duyệt"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid RowSpacing="0"
+              ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <ScrollView
+                Grid.Row="0"
+                Orientation="Vertical">
+                <Grid Margin="5,0,5,0"
+                      Padding="5"
+                      RowSpacing="0"
+                      ColumnSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Địa chỉ của địa điểm chọn-->
+                    <Label Text="Địa Chỉ:"
+                           FontSize="Small"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.Column="0"
+                           Grid.Row="0"/>
+                    <Label
+                        Text="{Binding address}"
+                        FontSize="Small"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Grid.Column="1"
+                        Grid.Row="0"/>
+                    <!--Tọa dộ hiển thị cho người dùng-->
+                    <Label Text="Tọa độ:"
+                           FontSize="Small"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.Column="0"
+                           Grid.Row="1"/>
+                    <Label
+                        x:Name="Position"
+                        FontSize="Small"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+                    <!--Tên Phường Xã, Tìm kiếm-->
+                    <Label Text="Xã/Phường"
+                           Grid.Column="0"
+                           Grid.Row="2"
+                           FontSize="Small"
+                           HorizontalOptions="Start"
+                           VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                           Text="{Binding CommunWard}"
+                           FontSize="Small"
+                           Grid.Column="1"
+                           Grid.Row="2"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                    <!--Tên Quận Huyện, Tìm kiếm-->
+                    <Label Text="Quận/Huyện:"
+                           Grid.Column="0"
+                           Grid.Row="3"
+                           x:Name="Commun"
+                           FontSize="Small"
+                           HorizontalOptions="Start"
+                           VerticalOptions="CenterAndExpand"/>
+                    <Label Text="{Binding District}"
+                           FontSize="Small"
+                           Grid.Column="1"
+                           Grid.Row="3"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                    <!--Tên Tỉnh/Thành phố, Tìm kiếm-->
+                    <Label Text="Tỉnh/Thành Phố:"
+                           Grid.Column="0"
+                           Grid.Row="4"
+                           FontSize="Small"
+                           HorizontalOptions="Start"
+                           VerticalOptions="CenterAndExpand"/>
+                    <Label Text="{Binding Province}"
+                           FontSize="Small"
+                           Grid.Column="1"
+                           Grid.Row="4"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                </Grid>
+            </ScrollView>
+            <googlemaps:Map
+                Grid.Row="1"
+                x:Name="map"
+                InitialCameraUpdate="-23.68, -46.87, 13, 30, 60"
+                VerticalOptions="FillAndExpand"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

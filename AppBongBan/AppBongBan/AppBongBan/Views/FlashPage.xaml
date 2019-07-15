@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="AppBongBan.Views.FlashPage">
+    <ContentPage.Content>
+        <RelativeLayout>
+            <Image
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Factor=1, Property=Height}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=1, Property=Width}"
+                Aspect="AspectFill"
+                Source="bg.png"/>
+            <!--<StackLayout RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Factor=1, Property=Height}"
+                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=1, Property=Width}">
+                <forms:CachedImage Source="logo.png"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Aspect="AspectFill"/>
+            </StackLayout>-->
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

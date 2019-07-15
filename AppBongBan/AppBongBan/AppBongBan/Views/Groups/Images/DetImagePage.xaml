@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:AppBongBan.Controls"
+             x:Class="AppBongBan.Views.Groups.Images.DetImagePage"
+             Title="{Binding Title, StringFormat='Ảnh {0}'}">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <!--<OnPlatform x:TypeArguments="View">
+                <OnPlatform.Android>-->
+            <controls:CarouselViewControl x:Name="carousel"
+                                          ShowArrows="true"
+                                          Orientation="Horizontal"
+                                          ShowIndicators="True"
+                                          VerticalOptions="FillAndExpand"/>
+
+            <!--</OnPlatform.Android>
+            </OnPlatform>-->
+
+        </StackLayout>
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+          
+            --><!--<OnPlatform x:TypeArguments="View">
+                <OnPlatform.Android>
+                    --><!--<cv:CarouselViewControl x:Name="carousel"
+                                            Grid.Row="0"
+                                            ShowArrows="true"
+                                            Position="1"
+                                            PositionSelected="carousel_PositionSelected"
+                                            ItemsSource="{Binding MyItemsSource}"
+                                            ShowIndicators="true"
+                                            Orientation="Horizontal"/>--><!--
+                </OnPlatform.Android>
+                <OnPlatform.iOS>
+                    <ListView ItemsSource="{Binding ItemSource}"
+                              HasUnevenRows="True"
+                              SeparatorVisibility="None"
+                              Grid.Row="0">
+                        <ListView.Header>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <forms:CachedImage
+                                         Source="{Binding Content.Accounts.Avatar_Uri}"
+                                         Aspect="AspectFit"
+                                         DownsampleToViewSize="True"
+                                         HeightRequest="40"
+                                         WidthRequest="40">
+                                        <forms:CachedImage.Transformations>
+                                            <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#011111"/>
+                                        </forms:CachedImage.Transformations>
+                                    </forms:CachedImage>
+                                    --><!--Tên với người đăng và luật--><!--
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding Content.Accounts.fullname}"
+                                         TextColor="Black"
+                                         FontAttributes="Bold"
+                                         FontSize="Small"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Content.Detail.TextRelation}"
+                                               IsVisible="{Binding Content.Detail.isRelative}"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="CenterAndExpand"
+                                               FontSize="Micro"
+                                               FontAttributes="Bold"/>
+                                            <Label FontSize="Micro"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="CenterAndExpand"
+                                               Text="{Binding Content.Detail.DateCreated}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    --><!--Tác vụ với dữ liệu--><!--
+                                    <StackLayout HorizontalOptions="EndAndExpand">
+                                        <Image
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="EndAndExpand"
+                                             HeightRequest="20"
+                                             WidthRequest="20"
+                                             Source="more_vert.png"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                --><!--Nội dung và tiêu đề bản tin--><!--
+                                <StackLayout
+                                            Orientation="Vertical"
+                                            HorizontalOptions="FillAndExpand">
+                                    --><!--tiêu đề bài viết--><!--
+                                    <Label 
+                                            Text="{Binding Content.Detail.Title}"
+                                            TextColor="Black"
+                                            FontAttributes="Bold"
+                                            FontSize="Small"                       
+                                            HorizontalOptions="FillAndExpand"/>
+                                    --><!--nội dung bài viết--><!--
+                                    <Label 
+                                            Text="{Binding Content.Detail.DetailContent.Text}"
+                                            TextColor="Black"
+                                            FontSize="Small"
+                                            HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                --><!--Hiển thị ảnh với 4 ảnh--><!--
+                            </StackLayout>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Vertical" Margin="2,5,2,5">
+                                        <Label Text="{Binding Index}"/>
+                                        <forms:CachedImage Source="{Binding Img}"
+                                                           Aspect="AspectFill"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </OnPlatform.iOS>
+            </OnPlatform>--><!--
+            <StackLayout Grid.Row="1"
+                         Orientation="Vertical">
+                <Label Text="Xem chi tiết bài viết"
+                       Margin="5,5,5,0"
+                       FontSize="Small"
+                       VerticalOptions="Start"
+                       TextColor="Blue">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapDetailContent"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <StackLayout Orientation="Horizontal" 
+                             Margin="5">
+                    <StackLayout Orientation="Horizontal"
+                                 Margin="0,0,5,0">
+                        <Image Source="like.png"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Start"
+                           Aspect="AspectFit"/>
+                        <Label Text="{Binding Content.LikeContent.LikeCount}"
+                               FontSize="Small"
+                               TextColor="Black"
+                               VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" 
+                                 Margin="5,0,0,0">
+                        <Image Source="icon_comment.png"
+                               HeightRequest="20"
+                               WidthRequest="20"
+                               VerticalOptions="CenterAndExpand"
+                               Aspect="AspectFit"/>
+                        <Label Text="{Binding Content.CommentCount}"
+                               FontSize="Small"
+                               TextColor="Black"
+                               VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Grid>-->
+    </ContentPage.Content>
+</ContentPage>

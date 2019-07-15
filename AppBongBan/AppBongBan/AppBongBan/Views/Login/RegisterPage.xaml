@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:AppBongBan.Custom"
+             xmlns:entrycustom="clr-namespace:AppBongBan.Custom.EntryCustom"
+             x:Class="AppBongBan.Views.Login.RegisterPage"
+             Title="Đăng kí"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <!--<ScrollView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.ColumnSpan="2">
+                    <Label 
+                   FontSize="14"
+                   HorizontalOptions="CenterAndExpand"
+                   FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Nhập Số Điện Thoại" 
+                              FontSize="14" 
+                              FontAttributes="Bold" 
+                              ForegroundColor="Black"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Margin="5,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Số điện thoại này để đăng nhập hoặc lấy lại mật khẩu khi cần thiết" 
+                              FontSize="14"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="0"
+                             Grid.Row="1"
+                                 Orientation="Horizontal" 
+                                 VerticalOptions="Start" 
+                                 Margin="0,5,0,0">
+                    <Label 
+                               VerticalOptions="CenterAndExpand" 
+                               TextColor="Blue" 
+                               FontSize="14" 
+                               Margin="0,0,0,0" 
+                               x:Name="ContryName">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AreaCodeCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Image Source="SelectDropdown.png" 
+                               Aspect="AspectFit" 
+                               VerticalOptions="CenterAndExpand"
+                               HeightRequest="30" 
+                               WidthRequest="30" 
+                               Margin="0,0,0,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                    Command="{Binding AreaCodeCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand"
+                                 Grid.Column="1"
+                                 Grid.Row="1">
+                    <Label 
+                                Text="Số điện thoại phải từ 10 đến 16 số, không chứa ký tự khác." 
+                                TextColor="Red" 
+                                x:Name="txtPhone"/>
+                    <custom:CustomEntry Placeholder="Nhập số điện thoại" 
+                                                FontSize="14" 
+                                                FontAttributes="None" 
+                                                VerticalOptions="CenterAndExpand" 
+                                                Margin="0,0,10,0" 
+                                                HorizontalOptions="FillAndExpand"
+                                                PlaceholderColor="Gray" 
+                                                x:Name="EntryPhone" 
+                                                HeightRequest="50" 
+                                                PropertyChanged="EntryPhone_PropertyChanged">
+                        <custom:CustomEntry.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </custom:CustomEntry.GestureRecognizers>
+                    </custom:CustomEntry>
+                    <Label Text="Tên không được vượt quá 50 ký tự, không bao gồm ký tự đặc biệt." 
+                                   TextColor="Red" x:Name="txtName"/>
+                    <custom:CustomEntry Margin="0,0,10,0" 
+                                            Placeholder="Nhập Tên đầy đủ"
+                                            PlaceholderColor="Gray"
+                                            FontSize="14" 
+                                            VerticalOptions="CenterAndExpand" 
+                                            HorizontalOptions="FillAndExpand" 
+                                            x:Name="EntryFullName" 
+                                            HeightRequest="50" 
+                                            PropertyChanged="EntryFullName_PropertyChanged"/>
+                    <Label Text="Mật khẩu phải từ 8 đến 20 ký tự, không bao gồm ký tự đặc biệt." 
+                                   TextColor="Red"  
+                                   x:Name="txtPass"/>
+                    <custom:CustomEntry Margin="0,0,10,0" 
+                                            Placeholder="Nhập mật khẩu" 
+                                            IsPassword="True" 
+                                            PlaceholderColor="Gray" 
+                                            FontSize="14" 
+                                            VerticalOptions="CenterAndExpand" 
+                                            HorizontalOptions="FillAndExpand"
+                                            x:Name="EntryPass" 
+                                            HeightRequest="50" 
+                                            PropertyChanged="EntryPass_PropertyChanged"/>
+                    <Label Text="Mật khẩu phải trùng với mật khẩu ở trên." 
+                                   TextColor="Red"  
+                                   x:Name="txtRePass"/>
+                    <custom:CustomEntry Margin="0,0,10,0" 
+                                            Placeholder="Nhập lại mật khẩu" 
+                                            IsPassword="True" 
+                                            PlaceholderColor="Gray" 
+                                            FontSize="14" 
+                                            VerticalOptions="CenterAndExpand" 
+                                            HorizontalOptions="FillAndExpand"
+                                            x:Name="EntryRePass" HeightRequest="50" 
+                                            PropertyChanged="EntryRePass_PropertyChanged"/>
+                    <Button Text="Tiếp Tục"
+                        BorderRadius="20"
+                            HeightRequest="50"
+                            Margin="20"
+                            BorderColor="Gray"
+                            BorderWidth="0.2"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="Center"
+                              x:Name="txtContinue"
+                            Clicked="TapRegister"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>-->
+        <ScrollView>
+            <!--<Frame BackgroundColor="White"
+               Padding="3"
+               CornerRadius="5"
+               VerticalOptions="Start"
+               Margin="10"
+               HasShadow="True"
+                  IsClippedToBounds="False"
+                   BorderColor="White"
+                   OutlineColor="White">-->
+                <StackLayout Spacing="0"
+                             Margin="10">
+                    <Label Text="Điền thông tin để tạo tài khoản"
+                           HorizontalOptions="CenterAndExpand"
+                          TextColor="#009dfe"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Margin="0,10,0,15"/>
+                    <Label Text="Tên không được vượt quá 50 ký tự, không bao gồm ký tự đặc biệt." 
+                         TextColor="Red" x:Name="txtName"/>
+                    <Entry Margin="0,0,0,0" 
+                           Placeholder="Nhập Tên đầy đủ"
+                            PlaceholderColor="Gray"
+                           BackgroundColor="White"
+                           FontSize="14" 
+                           HeightRequest="45"
+                            HorizontalOptions="FillAndExpand" 
+                           x:Name="EntryFullName" 
+                           PropertyChanged="EntryFullName_PropertyChanged"/>
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="#009dfe"
+                             HorizontalOptions="FillAndExpand"
+                            Margin="0,0,0,10"/>
+                    <Label 
+                                Text="Số điện thoại phải từ 10 đến 16 số, không chứa ký tự khác." 
+                                TextColor="Red" 
+                                x:Name="txtPhone"/>
+                    <Entry Placeholder="Nhập số điện thoại" 
+                                    FontSize="14" 
+                                    FontAttributes="None" 
+                                   Margin="0,0,0,0" 
+                                    BackgroundColor="White"
+                           HeightRequest="45"
+                                   HorizontalOptions="FillAndExpand"
+                                    PlaceholderColor="Gray" 
+                                    x:Name="EntryPhone" 
+                                    PropertyChanged="EntryPhone_PropertyChanged">
+                        <Entry.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </Entry.GestureRecognizers>
+                    </Entry>
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="#009dfe"
+                             HorizontalOptions="FillAndExpand"
+                            Margin="0,0,0,10"/>
+                    <Label Text="Mật khẩu phải từ 8 đến 20 ký tự, không bao gồm ký tự đặc biệt." 
+                                   TextColor="Red"  
+                                   x:Name="txtPass"/>
+                    <Entry Margin="0,0,0,0" 
+                                            Placeholder="Nhập mật khẩu" 
+                                            IsPassword="True" 
+                                            PlaceholderColor="Gray" 
+                                            FontSize="14" 
+                           HeightRequest="45"
+                                            BackgroundColor="White"
+                                            HorizontalOptions="FillAndExpand"
+                                            x:Name="EntryPass" 
+                                            PropertyChanged="EntryPass_PropertyChanged"/>
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="#009dfe"
+                             HorizontalOptions="FillAndExpand"
+                            Margin="0,0,0,10"/>
+                    <Label Text="Mật khẩu phải trùng với mật khẩu ở trên." 
+                                   TextColor="Red"  
+                                   x:Name="txtRePass"/>
+                    <Entry Margin="0,0,0,0" 
+                                            Placeholder="Nhập lại mật khẩu" 
+                                            IsPassword="True" 
+                                            PlaceholderColor="Gray" 
+                                      BackgroundColor="White"
+                                            FontSize="14" 
+                                            HorizontalOptions="FillAndExpand"
+                                            x:Name="EntryRePass"
+                           HeightRequest="45"
+                                            PropertyChanged="EntryRePass_PropertyChanged"/>
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="#009dfe"
+                             HorizontalOptions="FillAndExpand"
+                            Margin="0,0,0,0"/>
+                    <Button Text="Tiếp Tục"
+                           BorderRadius="10"
+                            HeightRequest="50"
+                            Margin="20"
+                            BorderColor="Gray"
+                            BackgroundColor="#E6E6E6"
+                            BorderWidth="0.2"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="Center"
+                              x:Name="txtContinue"
+                            IsEnabled="False"
+                            Clicked="TapRegister"/>
+                </StackLayout>
+            <!--</Frame>-->
+        </ScrollView>
+       
+    </ContentPage.Content>
+</ContentPage>

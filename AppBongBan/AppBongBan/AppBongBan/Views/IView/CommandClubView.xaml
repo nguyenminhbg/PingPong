@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppBongBan.Views.IView.CommandClubView">
+    <ContentView.Content>
+        <Grid 
+            RowSpacing="0"
+            ColumnSpacing="0"
+            BackgroundColor="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--chức năng tải ảnh-->
+            <StackLayout Grid.Column="0"
+                         Padding="2"
+                         x:Name="ViewAddImage">
+                <StackLayout
+                        Orientation="Vertical"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                    <Image 
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            Source="icon_img.png"/>
+                    <Label Text="Tải ảnh"
+                               TextColor="Black"/>
+                </StackLayout>
+            </StackLayout>
+            <!--chức năng check in-->
+            <StackLayout Grid.Column="1"
+                         Padding="2"
+                         x:Name="ViewCheckin">
+                <StackLayout Orientation="Vertical"
+                             HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                    <Image 
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            Source="cm_location.png"/>
+                    <Label Text="Check in"
+                               TextColor="Black"/>
+                </StackLayout>
+            </StackLayout>
+            <!--chức năng thêm bài đăng-->
+            <StackLayout Grid.Column="2"
+                         Padding="2"
+                         x:Name="ViewAddNews">
+                <StackLayout Orientation="Vertical"
+                             HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                    <Image
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="icon_addnews.png"/>
+                    <Label Text="Thêm bài" 
+                               TextColor="Black"
+                               HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+            <!--chức năng chia sẻ-->
+            <StackLayout Grid.Column="3"
+                         Padding="2"
+                         x:Name="ViewShare">
+                <StackLayout Orientation="Vertical"
+                             HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                    <Image 
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="share.png"/>
+                    <Label Text="Chia sẻ" 
+                           TextColor="Black"
+                           HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

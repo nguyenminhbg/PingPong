@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+             x:Class="AppBongBan.Views.PersonalViews.DetailAccInfoPage"
+             Title="Thông tin cá nhân">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <ScrollView>
+                <StackLayout>
+                    <iview:HeaderAccView VerticalOptions="Start"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--Tên hiển thi-->
+                        <Label Text="Tên hiển thị:"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           VerticalOptions="CenterAndExpand"
+                           Margin="10"
+                           TextColor="Black"
+                           FontSize="Small"/>
+                        <Label Text="UserName:"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           VerticalOptions="CenterAndExpand"
+                           Margin="10"
+                           TextColor="Black"
+                           FontSize="Small"/>
+                        <Label Text="Email:"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           VerticalOptions="CenterAndExpand"
+                           Margin="10"
+                           TextColor="Black"
+                           FontSize="Small"/>
+                        <Label Text="Giới tính:"
+                           Grid.Row="3"
+                           Grid.Column="0"
+                           VerticalOptions="CenterAndExpand"
+                           Margin="10"
+                           TextColor="Black"
+                           FontSize="Small"/>
+                        <Label Text="Ngày sinh:"
+                           Grid.Column="0"
+                           Grid.Row="4"
+                           VerticalOptions="CenterAndExpand"
+                           Margin="10"
+                           TextColor="Black"
+                           FontSize="Small"/>
+                        <Label Text="Điện thoai:"
+                           VerticalOptions="CenterAndExpand"
+                           Margin="10"
+                           TextColor="Black"
+                           FontSize="Small"
+                           Grid.Row="5"
+                           Grid.Column="0"/>
+
+                        <Label Text="{Binding Acc.fullname}"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               FontSize="Small"
+                               Margin="10"
+                               VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding Acc.UserName}"
+                           FontSize="Small"
+                           Margin="10"
+                           Grid.Row="1"
+                           HorizontalOptions="FillAndExpand"
+                           Grid.Column="1"
+                           VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding Acc.Email}"
+                           FontSize="Small"
+                           Margin="10"
+                           Grid.Row="2"
+                           HorizontalOptions="FillAndExpand"
+                           Grid.Column="1"
+                           VerticalOptions="CenterAndExpand"/>
+                        <Label Text="Đang phát triển"
+                               FontSize="Small"
+                               Margin="10"
+                               Grid.Row="3"
+                               Grid.Column="1"
+                               VerticalOptions="CenterAndExpand"/>
+                        <!--Tạm thời chưa cho hiển thị Birthday-->
+                        <!--<Label Text="{Binding BirthDay}"
+                               FontSize="Small"
+                               Margin="10"
+                               Grid.Row="4"
+                               Grid.Column="1"
+                               VerticalOptions="CenterAndExpand"/>-->
+                        <Label Text="{Binding Acc.Phone}"
+                           FontSize="Small"
+                           Margin="10"
+                           Grid.Row="5"
+                           Grid.Column="1"
+                           VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout VerticalOptions="EndAndExpand"
+                         HorizontalOptions="FillAndExpand">
+                <Button Text="{Binding TextChange}"
+                    FontSize="Small"
+                    TextColor="White"
+                    Clicked="Button_Clicked"
+                    BackgroundColor="#f15a25"
+                    CornerRadius="30"
+                    VerticalOptions="Start"
+                    Margin="40,0,40,20"/>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

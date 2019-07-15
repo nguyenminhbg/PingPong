@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:checkins="clr-namespace:AppBongBan.Views.Groups.Checkins"
+             xmlns:controls="clr-namespace:AppBongBan.Views.IView"
+             x:Class="AppBongBan.Views.Groups.Checkins.ListCheckInPage"
+             Title="Check-ins">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout 
+                    BackgroundColor="Gray"
+                    Padding="5"
+                    Orientation="Vertical" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                <Label Text="{Binding ListCheckinVM.MyClub.ClubName}"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding ListCheckinVM.MyClub.TextShow}"
+                       TextColor="Black"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <ListView
+                ItemsSource="{Binding ListCheckinVM.ListCheckIn}"
+                ItemAppearing="ListView_ItemAppearing"
+                HasUnevenRows="True"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame 
+                                    Margin="5"
+                                    CornerRadius="10"
+                                    Padding="5">
+                                <checkins:ItemCheckInView 
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"/>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Loading ..."
+                   IsVisible="{Binding ListCheckinVM.IsLoading}"
+                   FontSize="15"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="End"
+                   TextColor="#103763"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

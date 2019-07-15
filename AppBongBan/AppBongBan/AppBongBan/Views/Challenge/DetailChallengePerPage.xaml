@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:custom="clr-namespace:AppBongBan.Custom"
+             x:Class="AppBongBan.Views.Challenge.DetailChallengePerPage"
+             Title="Lời mời thách đấu"
+             >
+    <ContentPage.Content>
+        <Frame CornerRadius="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--Ảnh đại dại diện của người thách đấu-->
+                <StackLayout
+                 Grid.Column="0"
+                 Grid.Row="0"
+                 Grid.ColumnSpan="2">
+                    <forms:CachedImage
+                        Source="{Binding Chall.Acc.Avatar_Uri}"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        HeightRequest="100"
+                        WidthRequest="100"
+                        Aspect="AspectFit">
+                        <forms:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                        </forms:CachedImage.Transformations>
+                    </forms:CachedImage>
+                    <Label Text="{Binding Chall.Acc.fullname}"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <!--Nội dung người muốn gửi thách đấu-->
+                <StackLayout  Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Grid.Row="1">
+                    <Label Text="Nội dung gửi thách đấu:"/>
+                    <Label 
+                           Text="Nội dung vượt 150 kí tự"
+                           IsVisible="False"
+                           x:Name="lbNotifi"
+                           TextColor="Red"/>
+                    <custom:CustomEntry Placeholder="Tối đa 150 kí tự"
+                                        IsEnabled="False"
+                                        Text="{Binding Chall.Content}"
+                                        TextChanged="Content_TextChanged"
+                                        x:Name="Content"/>
+                </StackLayout>
+                <!--thời gian bắt đầu thi đấu-->
+                <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="2">
+                    <Label Text="Thời gian bắt đầu:"/>
+                    <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand">
+                        <!--Select start time-->
+                        <StackLayout 
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Orientation="Horizontal" >
+                            <Image
+                            HorizontalOptions="Start"
+                            Source="clock.png"
+                            HeightRequest="35"
+                            WidthRequest="35">
+                            </Image>
+                            <Label 
+                                 HorizontalOptions="FillAndExpand"
+                                 HeightRequest="35"
+                                 TextColor="Black"
+                                 Parent="5"
+                                 VerticalTextAlignment="Center"
+                                 VerticalOptions="CenterAndExpand"
+                                 Text="{Binding Chall.StringStartTime}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectStartTime}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <!--Select date time-->
+                        <StackLayout
+                          HeightRequest="35"
+                          VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
+                          Orientation="Horizontal" >
+                            <Image
+                                HorizontalOptions="Start"
+                                Source="calendar.png"
+                                HeightRequest="30"
+                                WidthRequest="30">
+                            </Image>
+                            <Label 
+                                TextColor="Black"
+                                HorizontalOptions="FillAndExpand"
+                                HeightRequest="35"
+                                Parent="5"
+                                VerticalTextAlignment="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Text="{Binding Chall.StringStartDate}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectStartDate}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="3">
+                    <Label Text="Thời gian kết thúc:"/>
+                    <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand">
+                        <StackLayout 
+                             HeightRequest="35"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             Orientation="Horizontal" >
+                            <Image
+                                 HorizontalOptions="Start"
+                                 Source="clock.png"
+                                 HeightRequest="35"
+                                 WidthRequest="35">
+                            </Image>
+                            <Label 
+                                HorizontalOptions="FillAndExpand"
+                                HeightRequest="35"
+                                TextColor="Black"
+                                Parent="5"
+                                VerticalTextAlignment="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Text="{Binding Chall.StringEndTime}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectEndTime}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <StackLayout
+                            HeightRequest="35"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal" >
+                            <Image
+                                HorizontalOptions="Start"
+                                Source="calendar.png"
+                                HeightRequest="30"
+                                WidthRequest="30">
+                            </Image>
+                            <Label 
+                                TextColor="Black"
+                                HorizontalOptions="FillAndExpand"
+                                HeightRequest="35"
+                                Parent="5"
+                                VerticalTextAlignment="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Text="{Binding Chall.StringEndDate}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectEndDate}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <Button
+                    Text="Chấp nhận"
+                    BackgroundColor="#f15a25"
+                    TextColor="White"
+                    Margin="10,0,10,0"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    CornerRadius="10"
+                    Clicked="Button_Clicked_1"/>
+                <Button
+                    Text="Hủy"
+                    BackgroundColor="#49463e"
+                    TextColor="White"
+                    Margin="10,0,10,0"
+                    Grid.Column="1"
+                    Grid.Row="4"
+                    CornerRadius="10"
+                    Clicked="Button_Clicked"/>
+            </Grid>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

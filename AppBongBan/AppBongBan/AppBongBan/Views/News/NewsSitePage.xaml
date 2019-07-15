@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:iview="clr-namespace:AppBongBan.Views.IView"
+    xmlns:listviewcustom="clr-namespace:AppBongBan.Custom.ListViewCustom"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    x:Class="AppBongBan.Views.News.NewsSitePage"
+    BackgroundColor="#D8D8D8">
+
+    <ContentPage.Content>
+        <StackLayout >
+            <listviewcustom:ListviewOfScroll HasUnevenRows="True"
+                                              IsRefreshing="{Binding NewsSite.IsFreshing, Mode=TwoWay}"
+                                              RefreshCommand="{Binding RefreshCommand}"
+                                              IsPullToRefreshEnabled="True"
+                                              ItemSelected="ListView_ItemSelected"
+                                              x:Name="listNews"
+                                               SeparatorColor="Transparent"
+                                              SeparatorVisibility="None"
+                                              ItemsSource="{Binding NewsSite.ListNews}"
+                                              ItemAppearing="ListNews_ItemAppearing">       
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+                <listviewcustom:ListviewOfScroll.Header >
+                    <StackLayout BackgroundColor="White">
+                        <StackLayout Orientation="Horizontal" 
+                                     Margin="5"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="FillAndExpand"
+                                      CompressedLayout.IsHeadless="True">
+                            <forms:CachedImage
+                                  x:Name="Avatar"
+                                  HeightRequest="50"
+                                  WidthRequest="50"
+                                  Aspect="AspectFill"
+                                  VerticalOptions="Center"
+                                  HorizontalOptions="Start">
+                                <forms:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation BorderSize="1" BorderHexColor="#000000"/>
+                                </forms:CachedImage.Transformations>
+                            </forms:CachedImage>
+                            <Label
+                                 Text="Hôm nay bạn thế nào?"
+                                 TextColor="Gray"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <forms:CachedImage HorizontalOptions="End"
+                                               Source="pingpong"
+                                               Aspect="AspectFit"
+                                               x:Name="imgAnimation"
+                                               Margin="0,0,5,0"/>
+                        </StackLayout>
+                        <BoxView HorizontalOptions="FillAndExpand"
+                                 HeightRequest="0.5"
+                                 BackgroundColor="#D8D8D8"/>
+                        <Grid ColumnSpacing="2"
+                              Margin="3"
+                              >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <!--<Frame Padding="2"
+                                   CornerRadius="5"  
+                                   Grid.Column="0"
+                                   Grid.Row="0"
+                                   BorderColor="#D8D8D8"
+                                   HasShadow="False">-->
+                                <StackLayout Grid.Column="0"
+                                              Grid.Row="0"
+                                         Orientation="Horizontal"
+                                         HorizontalOptions="Center"
+                                             VerticalOptions="FillAndExpand">
+                                    <forms:CachedImage Source="photo"
+                                                   Aspect="AspectFit"/>
+                                    <Label Text="Thư viện Ảnh"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="Black"
+                                       FontSize="10"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            <!--</Frame>-->
+                            
+                            <!--<Frame Padding="2"
+                                   CornerRadius="5"
+                                   Grid.Column="1"
+                                   Grid.Row="0"
+                                   BorderColor="#D8D8D8"
+                                   HasShadow="False">-->
+                                <StackLayout Grid.Column="1"
+                                               Grid.Row="0"
+                                         Orientation="Horizontal"
+                                         HorizontalOptions="Center"
+                                             VerticalOptions="FillAndExpand">
+                                    <forms:CachedImage Source="add_a_photo"
+                                                   Aspect="AspectFit"/>
+                                    <Label Text="Chụp ảnh"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="Black"
+                                       FontSize="10"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            <!--</Frame>-->
+                          
+                            <!--<Frame Padding="2"
+                                   CornerRadius="5"
+                                   Grid.Column="2"
+                                   Grid.Row="0"
+                                   BorderColor="#D8D8D8"
+                                   HasShadow="False">-->
+                                <StackLayout VerticalOptions="FillAndExpand"
+                                         Orientation="Horizontal"
+                                             Grid.Column="2"
+                                          Grid.Row="0"
+                                         HorizontalOptions="Center">
+                                    <forms:CachedImage Source="postvideoIcon"
+                                                   Aspect="AspectFit"/>
+                                    <Label Text="Đăng Video"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="Black"
+                                       FontSize="10"/>
+                                </StackLayout>
+                            <!--</Frame>-->
+                         
+                        </Grid>
+                        <Label Text="Không có tin tức hiển thị"
+                               TextColor="#f15a25"
+                               IsVisible="{Binding NewsSite.IsNewsNull}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </listviewcustom:ListviewOfScroll.Header>
+                <!-- Hiển thị nội dung bài đăng -->
+                <listviewcustom:ListviewOfScroll.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell CompressedLayout.IsHeadless="True">
+                            <StackLayout Padding="0" Spacing="0">
+                                <BoxView HeightRequest="8"
+                                         HorizontalOptions="Fill"
+                                         VerticalOptions="Fill"
+                                         BackgroundColor="#D8D8D8"/>
+                                <Frame Margin="0"
+                                    BackgroundColor="White"
+                                    Padding="5" 
+                                    HasShadow="False"
+                                    CornerRadius="0">
+                                    <iview:ItemNewsView
+                                        TapImage="ItemNewsView_TapImage"
+                                        TabComment="ItemNewsView_TabComment"
+                                        TabLike="ItemNewsView_TabLike"/>
+
+                                </Frame>
+                            </StackLayout>
+                           
+                        </ViewCell>
+                    </DataTemplate>
+                </listviewcustom:ListviewOfScroll.ItemTemplate>
+            </listviewcustom:ListviewOfScroll>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
